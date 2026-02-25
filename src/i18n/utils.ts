@@ -8,9 +8,11 @@ const translations = {
 
 type Locale = keyof typeof translations;
 
+const BASE = import.meta.env.BASE_URL;
+
 export function getLangFromUrl(url: URL): Locale {
   const path = url.pathname;
-  if (path.startsWith('/en')) return 'en';
+  if (path.startsWith(`${BASE}en`)) return 'en';
   return 'zh-CN';
 }
 
@@ -34,6 +36,6 @@ export function useTranslations(url: URL) {
 
 export function getAlternateUrl(url: URL): string {
   const lang = getLangFromUrl(url);
-  if (lang === 'zh-CN') return '/en';
-  return '/';
+  if (lang === 'zh-CN') return `${BASE}en`;
+  return BASE;
 }

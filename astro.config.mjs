@@ -2,7 +2,8 @@ import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
-  site: 'https://qollect.cc',
+  site: 'https://zongqir.github.io',
+  base: '/qollect-site',
   vite: {
     plugins: [tailwindcss()],
   },

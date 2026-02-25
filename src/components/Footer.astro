@@ -3,12 +3,13 @@ import { useTranslations } from '../i18n/utils';
 
 const t = useTranslations(Astro.url);
 const year = new Date().getFullYear();
+const base = import.meta.env.BASE_URL;
 ---
 
 <footer class="border-t border-white/5 mt-20">
   <div class="max-w-6xl mx-auto px-6 py-12 flex flex-col md:flex-row items-center justify-between gap-6">
     <div class="flex items-center gap-3">
-      <img src="/qollect-logo.svg" alt="Qollect" class="w-8 h-8 rounded-lg" />
+      <img src={`${base}qollect-logo.svg`} alt="Qollect" class="w-8 h-8 rounded-lg" />
       <div>
         <span class="font-bold text-text-primary">Qollect</span>
         <span class="text-text-muted text-sm ml-2">{t('footer.slogan')}</span>
@@ -17,7 +18,7 @@ const year = new Date().getFullYear();
 
     <div class="flex items-center gap-6 text-sm text-text-muted">
       <a
-        href="https://github.com/Clarkkkk/qollect"
+        href="https://github.com/zongqir/qollect"
         target="_blank"
         rel="noopener noreferrer"
         class="hover:text-text-secondary transition-colors"
@@ -25,7 +26,7 @@ const year = new Date().getFullYear();
         GitHub
       </a>
       <a
-        href="https://github.com/Clarkkkk/qollect/issues"
+        href="https://github.com/zongqir/qollect/issues"
         target="_blank"
         rel="noopener noreferrer"
         class="hover:text-text-secondary transition-colors"
