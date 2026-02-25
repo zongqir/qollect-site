@@ -42,24 +42,20 @@ const features = [
   <div class="space-y-24">
     {features.map((feature, i) => (
       <div class={`flex flex-col md:flex-row items-center gap-12 animate-on-scroll ${i % 2 === 1 ? 'md:flex-row-reverse' : ''}`}>
-        <div class="flex-1 space-y-4">
-          <div class="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-accent-blue/10 text-accent-blue">
+        <div class={`${feature.image ? 'flex-1' : 'w-full text-center'} space-y-4`}>
+          <div class={`inline-flex items-center justify-center w-14 h-14 rounded-xl bg-accent-blue/10 text-accent-blue ${!feature.image ? 'mx-auto' : ''}`}>
             <Fragment set:html={feature.icon} />
           </div>
           <h3 class="text-2xl font-bold text-text-primary">{feature.title}</h3>
           <p class="text-text-secondary leading-relaxed">{feature.description}</p>
         </div>
-        <div class="flex-1 w-full">
-          <div class="glass-card p-2">
-            {feature.image ? (
+        {feature.image && (
+          <div class="flex-1 w-full">
+            <div class="glass-card p-2">
               <img src={feature.image} alt={feature.title} class="rounded-lg w-full" loading="lazy" />
-            ) : (
-              <div class="bg-bg-secondary rounded-lg aspect-video flex items-center justify-center text-text-muted">
-                <p class="text-sm">{feature.title}</p>
-              </div>
-            )}
+            </div>
           </div>
-        </div>
+        )}
       </div>
     ))}
   </div>
