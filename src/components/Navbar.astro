@@ -1,0 +1,33 @@
+---
+import { useTranslations } from '../i18n/utils';
+import LanguageSwitch from './LanguageSwitch.astro';
+
+const t = useTranslations(Astro.url);
+---
+
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+  <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+    <a href="/" class="flex items-center gap-2.5">
+      <img src="/qollect-logo.svg" alt="Qollect" class="w-8 h-8 rounded-lg" />
+      <span class="text-lg font-bold text-text-primary">Qollect</span>
+    </a>
+
+    <div class="flex items-center gap-6">
+      <a href="#features" class="text-sm text-text-secondary hover:text-text-primary transition-colors">
+        {t('nav.features')}
+      </a>
+      <a href="#download" class="text-sm text-text-secondary hover:text-text-primary transition-colors">
+        {t('nav.download')}
+      </a>
+      <a
+        href="https://github.com/Clarkkkk/qollect"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-sm text-text-secondary hover:text-text-primary transition-colors"
+      >
+        {t('nav.github')}
+      </a>
+      <LanguageSwitch />
+    </div>
+  </div>
+</nav>
