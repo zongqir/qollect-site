@@ -78,18 +78,15 @@ export const enUS = {
   },
   download: {
     sectionTitle: 'Download Now',
-    subtitle: 'Free and open source. Always.',
+    subtitle: 'Lightweight and efficient.',
     version: 'Current version',
-    allReleases: 'View all releases',
-    mirror: 'CN Mirror',
     windows: 'Windows Download',
     macos: 'macOS Download',
-    linux: 'Linux Download',
+    linux: 'Linux (Coming Soon)',
   },
   footer: {
     slogan: 'Effortless mark. Instant recall.',
-    copyright: 'Qollect. Open source under MIT License.',
-    issues: 'Report Issues',
+    copyright: 'Qollect.',
   },
   lang: {
     switch: '中文',

@@ -78,18 +78,15 @@ export const zhCN = {
   },
   download: {
     sectionTitle: '立即下载',
-    subtitle: '免费开源，永久免费',
+    subtitle: '轻量高效，专注体验',
     version: '当前版本',
-    allReleases: '查看所有版本',
-    mirror: '国内镜像',
     windows: 'Windows 下载',
     macos: 'macOS 下载',
-    linux: 'Linux 下载',
+    linux: 'Linux (敬请期待)',
   },
   footer: {
     slogan: '无感标记，一触即回',
-    copyright: 'Qollect. 开源项目，基于 MIT 协议。',
-    issues: '问题反馈',
+    copyright: 'Qollect.',
   },
   lang: {
     switch: 'EN',

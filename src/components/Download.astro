@@ -18,14 +18,7 @@ const icons = {
   </h2>
   <p class="text-text-secondary mb-2 animate-on-scroll">{t('download.subtitle')}</p>
   <p class="text-sm text-text-muted mb-12 animate-on-scroll">
-    {t('download.version')}: <span id="dl-version">v{FALLBACK_VERSION}</span> &nbsp;·&nbsp;
-    <a href="https://github.com/zongqir/qollect/releases" target="_blank" rel="noopener noreferrer" class="text-accent-blue hover:underline">
-      {t('download.allReleases')}
-    </a>
-    &nbsp;·&nbsp;
-    <a href="https://dl.135070.xyz/latest.json" target="_blank" rel="noopener noreferrer" class="text-accent-blue hover:underline">
-      {t('download.mirror')}
-    </a>
+    {t('download.version')}: <span id="dl-version">v{FALLBACK_VERSION}</span>
   </p>
 
   <div class="flex flex-wrap items-center justify-center gap-6 animate-on-scroll">
@@ -41,12 +34,10 @@ const icons = {
       <Fragment set:html={icons.macos} />
       {t('download.macos')}
     </a>
-    <a id="dl-linux" href={`https://dl.135070.xyz/releases/v${FALLBACK_VERSION}/Qollect_${FALLBACK_VERSION}_amd64.AppImage`}
-      target="_blank" rel="noopener noreferrer"
-      class="btn-glow inline-flex items-center gap-3 px-8 py-4 text-lg">
+    <span class="btn-glow inline-flex items-center gap-3 px-8 py-4 text-lg opacity-50 cursor-not-allowed">
       <Fragment set:html={icons.linux} />
       {t('download.linux')}
-    </a>
+    </span>
   </div>
 </section>
 
@@ -65,7 +56,6 @@ const icons = {
       const links = {
         'dl-windows': `${base}/Qollect_${version}_x64-setup.exe`,
         'dl-macos': `${base}/Qollect_${version}_universal.dmg`,
-        'dl-linux': `${base}/Qollect_${version}_amd64.AppImage`,
       };
       for (const [id, href] of Object.entries(links)) {
         const el = document.getElementById(id);
