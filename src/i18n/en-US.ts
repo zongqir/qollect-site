@@ -81,6 +81,7 @@ export const enUS = {
     subtitle: 'Free and open source. Always.',
     version: 'Current version',
     allReleases: 'View all releases',
+    mirror: 'CN Mirror',
     windows: 'Windows Download',
     macos: 'macOS Download',
     linux: 'Linux Download',

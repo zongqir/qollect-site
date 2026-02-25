@@ -81,6 +81,7 @@ export const zhCN = {
     subtitle: '免费开源，永久免费',
     version: '当前版本',
     allReleases: '查看所有版本',
+    mirror: '国内镜像',
     windows: 'Windows 下载',
     macos: 'macOS 下载',
     linux: 'Linux 下载',
