@@ -3,7 +3,7 @@ import { useTranslations } from '../i18n/utils';
 
 const t = useTranslations(Astro.url);
 
-const FALLBACK_VERSION = '0.2.0';
+const FALLBACK_VERSION = '0.2.3';
 
 const icons = {
   windows: `<svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg>`,
@@ -28,7 +28,7 @@ const icons = {
       <Fragment set:html={icons.windows} />
       {t('download.windows')}
     </a>
-    <a id="dl-macos" href={`https://dl.135070.xyz/releases/v${FALLBACK_VERSION}/Qollect_${FALLBACK_VERSION}_universal.dmg`}
+    <a id="dl-macos" href={`https://dl.135070.xyz/releases/v${FALLBACK_VERSION}/Qollect_universal.app.tar.gz`}
       target="_blank" rel="noopener noreferrer"
       class="btn-glow inline-flex items-center gap-3 px-8 py-4 text-lg">
       <Fragment set:html={icons.macos} />
@@ -44,23 +44,29 @@ const icons = {
 <script>
   const R2_BASE = 'https://dl.135070.xyz';
 
-  fetch(`${R2_BASE}/latest.json`)
-    .then(r => r.json())
+  fetch(`${R2_BASE}/latest.json?t=${Date.now()}`, { cache: 'no-store' })
+    .then(r => {
+      if (!r.ok) throw new Error(`latest.json status ${r.status}`);
+      return r.json();
+    })
     .then(data => {
-      const version = data.version?.replace(/^v/, '') || '';
+      const version = String(data.version || '').replace(/^v/, '');
       if (!version) return;
 
       document.getElementById('dl-version').textContent = `v${version}`;
 
       const base = `${R2_BASE}/releases/v${version}`;
+      const platforms = data.platforms || {};
       const links = {
-        'dl-windows': `${base}/Qollect_${version}_x64-setup.exe`,
-        'dl-macos': `${base}/Qollect_${version}_universal.dmg`,
+        'dl-windows': platforms['windows-x86_64-nsis']?.url || platforms['windows-x86_64']?.url || `${base}/Qollect_${version}_x64-setup.exe`,
+        'dl-macos': platforms['darwin-universal']?.url || platforms['darwin-universal-app']?.url || `${base}/Qollect_universal.app.tar.gz`,
       };
       for (const [id, href] of Object.entries(links)) {
         const el = document.getElementById(id);
         if (el) el.href = href;
       }
     })
-    .catch(() => {});
+    .catch((error) => {
+      console.warn('[download] failed to load latest.json, using fallback version', error);
+    });
 </script>
