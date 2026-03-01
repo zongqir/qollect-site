@@ -8,104 +8,195 @@ const base = import.meta.env.BASE_URL;
 ---
 
 <Layout
-  title="Qollect 帮助中心 - 用户使用手册"
-  description="Qollect 用户手册：安装、基础操作、AI/OCR、局域网同步、隐私与故障排查。"
+  title="Qollect 帮助中心 - 完整用户手册"
+  description="Qollect 完整用户手册：快速开始、拖入拖出、工作台、双击自动粘贴、透明度与主题色、AI/OCR、同步与故障排查。"
   lang="zh-CN"
 >
   <Navbar />
   <main class="pt-24 pb-16 px-6">
-    <section class="max-w-4xl mx-auto">
+    <section class="max-w-5xl mx-auto">
       <div class="glass-card p-8 md:p-10">
         <p class="text-xs uppercase tracking-[0.2em] text-text-muted">Qollect Help Center</p>
-        <h1 class="mt-3 text-3xl md:text-4xl font-extrabold text-text-primary">Qollect 用户使用手册</h1>
+        <h1 class="mt-3 text-3xl md:text-4xl font-extrabold text-text-primary">Qollect 完整用户手册</h1>
         <p class="mt-4 text-text-secondary leading-7">
-          这份手册面向普通用户，覆盖从下载安装到日常高频使用的核心路径。如果你是第一次使用，建议先看
-          <strong class="text-text-primary">「快速开始」</strong>和<strong class="text-text-primary">「核心工作流」</strong>。
+          这是一份面向真实使用场景的操作手册。你可以把它当作“上手指南 + 功能字典 + 排障手册”。
+          如果你刚开始使用，请按顺序阅读「快速开始」与「高频工作流」。
         </p>
       </div>
     </section>
 
-    <section class="max-w-4xl mx-auto mt-8 glass-card p-8">
-      <h2 class="text-2xl font-bold text-text-primary">1. 快速开始（3 分钟）</h2>
+    <section class="max-w-5xl mx-auto mt-8 glass-card p-8">
+      <h2 class="text-2xl font-bold text-text-primary">目录</h2>
+      <div class="mt-5 grid md:grid-cols-2 gap-3 text-sm">
+        <a href="#quick-start" class="px-4 py-3 rounded-xl border border-white/10 hover:border-accent-blue/60 text-text-secondary hover:text-text-primary transition-all">1. 快速开始</a>
+        <a href="#workflow" class="px-4 py-3 rounded-xl border border-white/10 hover:border-accent-blue/60 text-text-secondary hover:text-text-primary transition-all">2. 高频工作流</a>
+        <a href="#drag-flow" class="px-4 py-3 rounded-xl border border-white/10 hover:border-accent-blue/60 text-text-secondary hover:text-text-primary transition-all">3. 拖入拖出（重点）</a>
+        <a href="#settings" class="px-4 py-3 rounded-xl border border-white/10 hover:border-accent-blue/60 text-text-secondary hover:text-text-primary transition-all">4. 设置中心详解</a>
+        <a href="#ai-ocr" class="px-4 py-3 rounded-xl border border-white/10 hover:border-accent-blue/60 text-text-secondary hover:text-text-primary transition-all">5. AI / OCR / 分享同步</a>
+        <a href="#faq" class="px-4 py-3 rounded-xl border border-white/10 hover:border-accent-blue/60 text-text-secondary hover:text-text-primary transition-all">6. 常见问题与排障</a>
+      </div>
+    </section>
+
+    <section id="quick-start" class="max-w-5xl mx-auto mt-8 glass-card p-8">
+      <h2 class="text-2xl font-bold text-text-primary">1. 快速开始（第一次安装建议）</h2>
       <ol class="mt-4 space-y-3 text-text-secondary leading-7 list-decimal pl-5">
-        <li>下载并安装 Qollect（Windows / macOS）。</li>
-        <li>首次启动后，确认系统已授予必要权限（如开机启动、辅助功能等）。</li>
-        <li>按默认快捷键呼出主窗口：<code class="font-mono text-text-primary">Alt+X</code>（可在设置里修改）。</li>
-        <li>复制几段文本或图片，回到 Qollect 查看历史记录是否自动出现。</li>
+        <li>下载安装后，先在设置里确认全局快捷键（默认 <code class="font-mono text-text-primary">Alt+X</code>）。</li>
+        <li>复制几段文本和图片，确认历史列表会自动更新。</li>
+        <li>点开一条历史，尝试「复制」「放入工作台」「收藏」三个核心动作。</li>
+        <li>滚动标题栏滚轮，体验窗口透明度调整（适合边看边工作）。</li>
       </ol>
-      <p class="mt-4 text-sm text-text-muted">
-        提示：不同系统或输入法可能与快捷键冲突，冲突时请在「设置 → 快捷键」里换一个组合。
+      <figure class="mt-6">
+        <img src={`${base}screenshots/full-zh.png`} alt="Qollect 完整视图截图" class="w-full rounded-xl border border-white/10 shadow-xl" loading="lazy" />
+        <figcaption class="mt-2 text-xs text-text-muted">完整视图：历史区 + 面板区 + 工作台入口</figcaption>
+      </figure>
+    </section>
+
+    <section id="workflow" class="max-w-5xl mx-auto mt-8 glass-card p-8">
+      <h2 class="text-2xl font-bold text-text-primary">2. 高频工作流（建议日常照这个走）</h2>
+      <div class="mt-4 space-y-4 text-text-secondary leading-7">
+        <p><strong class="text-text-primary">步骤 A：</strong>平时复制内容，Qollect 持续后台记录。</p>
+        <p><strong class="text-text-primary">步骤 B：</strong>需要回找内容时，优先用关键词 + 标签筛选。</p>
+        <p><strong class="text-text-primary">步骤 C：</strong>重要条目立即放入工作台，临时有价值条目先收藏。</p>
+        <p><strong class="text-text-primary">步骤 D：</strong>在工作台内整理、导出、二次处理（笔记/合并/分享）。</p>
+      </div>
+      <figure class="mt-6">
+        <img src={`${base}screenshots/history-zh.png`} alt="Qollect 历史检索截图" class="w-full rounded-xl border border-white/10 shadow-xl" loading="lazy" />
+        <figcaption class="mt-2 text-xs text-text-muted">历史检索：关键词、标签、类型筛选组合使用效率最高</figcaption>
+      </figure>
+    </section>
+
+    <section id="drag-flow" class="max-w-5xl mx-auto mt-8 glass-card p-8">
+      <h2 class="text-2xl font-bold text-text-primary">3. 拖入拖出（你提到的重点功能）</h2>
+      <div class="mt-4 space-y-5 text-text-secondary leading-7">
+        <div>
+          <h3 class="text-lg font-semibold text-text-primary">3.1 拖入 Qollect</h3>
+          <ul class="mt-2 list-disc pl-5 space-y-2">
+            <li>把文本、图片或文件直接拖到主窗口，可快速加入历史或工作台。</li>
+            <li>适合把桌面文件、浏览器内容、聊天附件统一汇总到一个位置。</li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-lg font-semibold text-text-primary">3.2 从 Qollect 拖出到其他应用</h3>
+          <ul class="mt-2 list-disc pl-5 space-y-2">
+            <li>在条目工具栏使用「拖出」动作，把内容直接投放到目标应用。</li>
+            <li>典型场景：拖到聊天窗口、邮件编辑器、文档软件、任务系统。</li>
+            <li>如果某些应用接收失败，优先确认目标应用是否支持对应拖放类型。</li>
+          </ul>
+        </div>
+      </div>
+      <figure class="mt-6">
+        <img src={`${base}screenshots/workbench-zh.png`} alt="Qollect 工作台拖拽整理截图" class="w-full rounded-xl border border-white/10 shadow-xl" loading="lazy" />
+        <figcaption class="mt-2 text-xs text-text-muted">工作台可拖拽排序，适合做临时素材区</figcaption>
+      </figure>
+    </section>
+
+    <section id="settings" class="max-w-5xl mx-auto mt-8 glass-card p-8">
+      <h2 class="text-2xl font-bold text-text-primary">4. 设置中心详解（含你提到的双击复制等）</h2>
+      <div class="mt-5 overflow-x-auto">
+        <table class="w-full text-sm border-collapse">
+          <thead>
+            <tr class="border-b border-white/10 text-text-primary">
+              <th class="text-left py-3 pr-4">设置项</th>
+              <th class="text-left py-3 pr-4">作用</th>
+              <th class="text-left py-3">建议</th>
+            </tr>
+          </thead>
+          <tbody class="text-text-secondary">
+            <tr class="border-b border-white/5">
+              <td class="py-3 pr-4">双击自动粘贴</td>
+              <td class="py-3 pr-4">双击条目后自动复制并粘贴到上一个应用，窗口自动隐藏。</td>
+              <td class="py-3">高频写作/客服/运营场景建议开启。</td>
+            </tr>
+            <tr class="border-b border-white/5">
+              <td class="py-3 pr-4">连按复制自动放入工作台</td>
+              <td class="py-3 pr-4">短时间内连续两次复制，会自动把该内容放入工作台。</td>
+              <td class="py-3">适合“边浏览边收藏重点”。</td>
+            </tr>
+            <tr class="border-b border-white/5">
+              <td class="py-3 pr-4">全局快捷键</td>
+              <td class="py-3 pr-4">呼出主面板、复制并放入工作台等快捷动作。</td>
+              <td class="py-3">避免与系统/输入法冲突，优先 Ctrl+Alt 组合。</td>
+            </tr>
+            <tr class="border-b border-white/5">
+              <td class="py-3 pr-4">自动清理</td>
+              <td class="py-3 pr-4">按最大条数/保留天数自动清理旧数据。</td>
+              <td class="py-3">先保守设置，稳定后再收紧。</td>
+            </tr>
+            <tr class="border-b border-white/5">
+              <td class="py-3 pr-4">主题色</td>
+              <td class="py-3 pr-4">调整界面强调色，匹配你的桌面视觉风格。</td>
+              <td class="py-3">建议选对比度更高的颜色，阅读更轻松。</td>
+            </tr>
+            <tr>
+              <td class="py-3 pr-4">标题栏滚轮透明度</td>
+              <td class="py-3 pr-4">鼠标滚轮在标题栏滚动可实时调整窗口透明度。</td>
+              <td class="py-3">多任务并行时可调低，减少遮挡。</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-5 text-sm text-text-muted">
+        说明：你提到的“修改颜色”和“滑动透明”都属于高频易感知功能，建议在新用户引导中优先展示。
       </p>
     </section>
 
-    <section class="max-w-4xl mx-auto mt-8 glass-card p-8">
-      <h2 class="text-2xl font-bold text-text-primary">2. 核心工作流（建议每天这样用）</h2>
-      <div class="mt-4 space-y-4 text-text-secondary leading-7">
-        <p><strong class="text-text-primary">步骤 A：</strong>平时正常复制，Qollect 会自动记录历史。</p>
-        <p><strong class="text-text-primary">步骤 B：</strong>需要找内容时，打开主窗口后直接搜索关键词、标签或类型。</p>
-        <p><strong class="text-text-primary">步骤 C：</strong>点击条目立即复制回剪贴板，或直接打开原始链接/文件。</p>
-        <p><strong class="text-text-primary">步骤 D：</strong>把高频内容固定到工作台（Workbench），作为长期素材库。</p>
-      </div>
-    </section>
-
-    <section class="max-w-4xl mx-auto mt-8 glass-card p-8">
-      <h2 class="text-2xl font-bold text-text-primary">3. 常用功能说明</h2>
-      <div class="mt-5 space-y-6">
-        <div>
-          <h3 class="text-lg font-semibold text-text-primary">3.1 搜索与筛选</h3>
-          <p class="mt-2 text-text-secondary leading-7">支持全文关键词、标签、内容类型筛选。建议配合 AI 标签使用，检索速度更快。</p>
+    <section id="ai-ocr" class="max-w-5xl mx-auto mt-8 glass-card p-8">
+      <h2 class="text-2xl font-bold text-text-primary">5. AI / OCR / 分享与同步</h2>
+      <div class="mt-4 grid md:grid-cols-2 gap-6">
+        <div class="rounded-xl border border-white/10 p-5">
+          <h3 class="text-lg font-semibold text-text-primary">AI 标签</h3>
+          <p class="mt-2 text-text-secondary leading-7">配置 API Key 后可自动标注标签，适合长期内容归档。</p>
         </div>
-        <div>
-          <h3 class="text-lg font-semibold text-text-primary">3.2 AI 标签</h3>
-          <p class="mt-2 text-text-secondary leading-7">在设置里配置 AI 服务商后，Qollect 可自动打标签，适合大量文本内容管理。</p>
+        <div class="rounded-xl border border-white/10 p-5">
+          <h3 class="text-lg font-semibold text-text-primary">OCR 识别</h3>
+          <p class="mt-2 text-text-secondary leading-7">图片转文字后可全文搜索，截图资料检索效率明显提升。</p>
         </div>
-        <div>
-          <h3 class="text-lg font-semibold text-text-primary">3.3 OCR 识别</h3>
-          <p class="mt-2 text-text-secondary leading-7">图片内容可进行文字识别，识别结果可被搜索，适合截图场景。</p>
+        <div class="rounded-xl border border-white/10 p-5">
+          <h3 class="text-lg font-semibold text-text-primary">二维码 / 临时链接分享</h3>
+          <p class="mt-2 text-text-secondary leading-7">把选中内容快速分享给手机或同事，适合跨设备流转。</p>
         </div>
-        <div>
-          <h3 class="text-lg font-semibold text-text-primary">3.4 迷你模式与布局</h3>
-          <p class="mt-2 text-text-secondary leading-7">支持迷你模式、列表模式、面板模式、全览模式。你可以按当前任务切换最顺手的布局。</p>
-        </div>
-        <div>
-          <h3 class="text-lg font-semibold text-text-primary">3.5 分享与同步</h3>
-          <p class="mt-2 text-text-secondary leading-7">支持二维码分享、临时文件分享、局域网多设备同步。适合跨设备流转内容。</p>
+        <div class="rounded-xl border border-white/10 p-5">
+          <h3 class="text-lg font-semibold text-text-primary">局域网同步</h3>
+          <p class="mt-2 text-text-secondary leading-7">同一局域网内多设备发现和同步，配对后可一键推送/拉取。</p>
         </div>
       </div>
+      <figure class="mt-6">
+        <img src={`${base}screenshots/ai-zh.png`} alt="Qollect AI 功能截图" class="w-full rounded-xl border border-white/10 shadow-xl" loading="lazy" />
+        <figcaption class="mt-2 text-xs text-text-muted">AI 标签与智能能力建议在设置完成后再集中启用</figcaption>
+      </figure>
     </section>
 
-    <section class="max-w-4xl mx-auto mt-8 glass-card p-8">
-      <h2 class="text-2xl font-bold text-text-primary">4. 隐私与数据</h2>
-      <ul class="mt-4 space-y-3 text-text-secondary leading-7 list-disc pl-5">
-        <li>默认本地优先，核心历史数据保存在本机 SQLite。</li>
-        <li>可在设置中配置自动清理策略（条数与保留天数）。</li>
-        <li>导入/导出支持密码保护，建议定期备份关键数据。</li>
-      </ul>
-    </section>
-
-    <section class="max-w-4xl mx-auto mt-8 glass-card p-8">
-      <h2 class="text-2xl font-bold text-text-primary">5. 常见问题（FAQ）</h2>
+    <section id="faq" class="max-w-5xl mx-auto mt-8 glass-card p-8">
+      <h2 class="text-2xl font-bold text-text-primary">6. 常见问题与排障</h2>
       <div class="mt-5 space-y-5">
         <div>
           <p class="font-semibold text-text-primary">Q: 复制了内容但列表没更新？</p>
-          <p class="mt-1 text-text-secondary leading-7">A: 先确认应用在运行，再检查系统权限与冲突软件（剪贴板增强工具、输入法插件）。</p>
+          <p class="mt-1 text-text-secondary leading-7">A: 先确认 Qollect 在运行，再检查系统权限与冲突软件（剪贴板增强工具、输入法插件）。</p>
         </div>
         <div>
-          <p class="font-semibold text-text-primary">Q: 快捷键没有反应？</p>
-          <p class="mt-1 text-text-secondary leading-7">A: 多数情况是快捷键冲突。进入设置改成未被系统占用的组合即可。</p>
+          <p class="font-semibold text-text-primary">Q: 双击自动粘贴不生效？</p>
+          <p class="mt-1 text-text-secondary leading-7">A: 先在设置确认已开启该功能，再检查目标应用是否允许程序化粘贴。</p>
         </div>
         <div>
-          <p class="font-semibold text-text-primary">Q: AI / OCR 识别失败？</p>
-          <p class="mt-1 text-text-secondary leading-7">A: 检查 API Key、网络连通性与服务商余额/配额，必要时切换备用模型或供应商。</p>
+          <p class="font-semibold text-text-primary">Q: 拖出到某个应用失败？</p>
+          <p class="mt-1 text-text-secondary leading-7">A: 某些应用仅支持特定拖放类型。可先用“复制”验证内容，再切换目标应用测试。</p>
+        </div>
+        <div>
+          <p class="font-semibold text-text-primary">Q: 快捷键不响应？</p>
+          <p class="mt-1 text-text-secondary leading-7">A: 通常是冲突。到设置改成新的组合，并尽量避免系统保留快捷键。</p>
+        </div>
+        <div>
+          <p class="font-semibold text-text-primary">Q: AI / OCR 报错？</p>
+          <p class="mt-1 text-text-secondary leading-7">A: 依次检查 API Key、网络、模型/供应商可用性与配额限制。</p>
         </div>
       </div>
     </section>
 
-    <section class="max-w-4xl mx-auto mt-8">
+    <section class="max-w-5xl mx-auto mt-8">
       <div class="glass-card p-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div>
-          <h2 class="text-xl font-bold text-text-primary">需要更多帮助？</h2>
-          <p class="text-text-secondary mt-1">欢迎提交 Issue 或反馈你的使用场景，帮助 Qollect 变得更好。</p>
+          <h2 class="text-xl font-bold text-text-primary">还需要更细的帮助？</h2>
+          <p class="text-text-secondary mt-1">欢迎在 Issue 里描述你的具体场景，我可以继续按场景补充手册内容。</p>
         </div>
         <div class="flex gap-3">
           <a class="btn-glow-outline text-sm" href={`${base}#download`}>返回下载</a>

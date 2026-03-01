@@ -8,105 +8,193 @@ const base = import.meta.env.BASE_URL;
 ---
 
 <Layout
-  title="Qollect Help Center - User Manual"
-  description="Qollect user guide covering setup, daily workflow, AI/OCR, LAN sync, privacy, and troubleshooting."
+  title="Qollect Help Center - Complete User Manual"
+  description="Complete Qollect user manual: quick start, drag in/out, workbench, double-click auto paste, opacity and accent color, AI/OCR, sync, and troubleshooting."
   lang="en"
 >
   <Navbar />
   <main class="pt-24 pb-16 px-6">
-    <section class="max-w-4xl mx-auto">
+    <section class="max-w-5xl mx-auto">
       <div class="glass-card p-8 md:p-10">
         <p class="text-xs uppercase tracking-[0.2em] text-text-muted">Qollect Help Center</p>
-        <h1 class="mt-3 text-3xl md:text-4xl font-extrabold text-text-primary">Qollect User Manual</h1>
+        <h1 class="mt-3 text-3xl md:text-4xl font-extrabold text-text-primary">Qollect Complete User Manual</h1>
         <p class="mt-4 text-text-secondary leading-7">
-          This guide is written for end users and focuses on practical daily usage. If you are new,
-          start with <strong class="text-text-primary">Quick Start</strong> and
-          <strong class="text-text-primary"> Core Workflow</strong>.
+          This guide is practical by design: onboarding, daily workflows, key settings, and troubleshooting.
+          If you are new, start with <strong class="text-text-primary">Quick Start</strong> and
+          <strong class="text-text-primary"> Daily Workflow</strong>.
         </p>
       </div>
     </section>
 
-    <section class="max-w-4xl mx-auto mt-8 glass-card p-8">
-      <h2 class="text-2xl font-bold text-text-primary">1. Quick Start (3 minutes)</h2>
+    <section class="max-w-5xl mx-auto mt-8 glass-card p-8">
+      <h2 class="text-2xl font-bold text-text-primary">Table of Contents</h2>
+      <div class="mt-5 grid md:grid-cols-2 gap-3 text-sm">
+        <a href="#quick-start" class="px-4 py-3 rounded-xl border border-white/10 hover:border-accent-blue/60 text-text-secondary hover:text-text-primary transition-all">1. Quick Start</a>
+        <a href="#workflow" class="px-4 py-3 rounded-xl border border-white/10 hover:border-accent-blue/60 text-text-secondary hover:text-text-primary transition-all">2. Daily Workflow</a>
+        <a href="#drag-flow" class="px-4 py-3 rounded-xl border border-white/10 hover:border-accent-blue/60 text-text-secondary hover:text-text-primary transition-all">3. Drag In / Drag Out</a>
+        <a href="#settings" class="px-4 py-3 rounded-xl border border-white/10 hover:border-accent-blue/60 text-text-secondary hover:text-text-primary transition-all">4. Settings Explained</a>
+        <a href="#ai-ocr" class="px-4 py-3 rounded-xl border border-white/10 hover:border-accent-blue/60 text-text-secondary hover:text-text-primary transition-all">5. AI / OCR / Sharing & Sync</a>
+        <a href="#faq" class="px-4 py-3 rounded-xl border border-white/10 hover:border-accent-blue/60 text-text-secondary hover:text-text-primary transition-all">6. FAQ & Troubleshooting</a>
+      </div>
+    </section>
+
+    <section id="quick-start" class="max-w-5xl mx-auto mt-8 glass-card p-8">
+      <h2 class="text-2xl font-bold text-text-primary">1. Quick Start</h2>
       <ol class="mt-4 space-y-3 text-text-secondary leading-7 list-decimal pl-5">
-        <li>Download and install Qollect (Windows / macOS).</li>
-        <li>On first launch, grant required system permissions if prompted.</li>
-        <li>Open the main window with default shortcut: <code class="font-mono text-text-primary">Alt+X</code>.</li>
-        <li>Copy a few texts/images and confirm they appear in history automatically.</li>
+        <li>Install Qollect and confirm your global hotkey (default: <code class="font-mono text-text-primary">Alt+X</code>).</li>
+        <li>Copy a few texts and images, then verify history updates automatically.</li>
+        <li>Open an item and try three core actions: Copy, Pin to Workbench, Favorite.</li>
+        <li>Use mouse wheel over title bar to adjust window transparency.</li>
       </ol>
-      <p class="mt-4 text-sm text-text-muted">
-        Tip: If your shortcut does not work, it is usually a conflict with OS/global tools. Change it in Settings.
-      </p>
+      <figure class="mt-6">
+        <img src={`${base}screenshots/full-en.png`} alt="Qollect full view screenshot" class="w-full rounded-xl border border-white/10 shadow-xl" loading="lazy" />
+        <figcaption class="mt-2 text-xs text-text-muted">Full view: history area + detail panel + workbench entry</figcaption>
+      </figure>
     </section>
 
-    <section class="max-w-4xl mx-auto mt-8 glass-card p-8">
-      <h2 class="text-2xl font-bold text-text-primary">2. Core Workflow (recommended daily path)</h2>
+    <section id="workflow" class="max-w-5xl mx-auto mt-8 glass-card p-8">
+      <h2 class="text-2xl font-bold text-text-primary">2. Daily Workflow</h2>
       <div class="mt-4 space-y-4 text-text-secondary leading-7">
-        <p><strong class="text-text-primary">Step A:</strong> Copy as usual, Qollect captures clipboard history in the background.</p>
-        <p><strong class="text-text-primary">Step B:</strong> When needed, open Qollect and search by keyword, tag, or type.</p>
-        <p><strong class="text-text-primary">Step C:</strong> Click an item to copy it back, or open its original file/link.</p>
-        <p><strong class="text-text-primary">Step D:</strong> Pin important items to Workbench for long-term reuse.</p>
+        <p><strong class="text-text-primary">Step A:</strong> Copy content as usual. Qollect captures it in the background.</p>
+        <p><strong class="text-text-primary">Step B:</strong> Search by keyword + tags + type filters.</p>
+        <p><strong class="text-text-primary">Step C:</strong> Pin important items to Workbench, favorite medium-term references.</p>
+        <p><strong class="text-text-primary">Step D:</strong> Organize and export from Workbench when needed.</p>
+      </div>
+      <figure class="mt-6">
+        <img src={`${base}screenshots/history-en.png`} alt="Qollect history search screenshot" class="w-full rounded-xl border border-white/10 shadow-xl" loading="lazy" />
+        <figcaption class="mt-2 text-xs text-text-muted">Search and filter workflow for fast retrieval</figcaption>
+      </figure>
+    </section>
+
+    <section id="drag-flow" class="max-w-5xl mx-auto mt-8 glass-card p-8">
+      <h2 class="text-2xl font-bold text-text-primary">3. Drag In / Drag Out</h2>
+      <div class="mt-4 space-y-5 text-text-secondary leading-7">
+        <div>
+          <h3 class="text-lg font-semibold text-text-primary">3.1 Drag into Qollect</h3>
+          <ul class="mt-2 list-disc pl-5 space-y-2">
+            <li>Drag text, images, or files into Qollect to quickly add them to history/workbench.</li>
+            <li>Useful for consolidating scattered content from browser, chat apps, and desktop.</li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-lg font-semibold text-text-primary">3.2 Drag out from Qollect</h3>
+          <ul class="mt-2 list-disc pl-5 space-y-2">
+            <li>Use the item toolbar drag-out action to drop content directly into other apps.</li>
+            <li>Typical targets: chat windows, docs, email clients, task tools.</li>
+            <li>If drop fails, check whether the target app supports the content type.</li>
+          </ul>
+        </div>
+      </div>
+      <figure class="mt-6">
+        <img src={`${base}screenshots/workbench-en.png`} alt="Qollect workbench drag organization screenshot" class="w-full rounded-xl border border-white/10 shadow-xl" loading="lazy" />
+        <figcaption class="mt-2 text-xs text-text-muted">Workbench supports drag sorting for quick curation</figcaption>
+      </figure>
+    </section>
+
+    <section id="settings" class="max-w-5xl mx-auto mt-8 glass-card p-8">
+      <h2 class="text-2xl font-bold text-text-primary">4. Settings Explained</h2>
+      <div class="mt-5 overflow-x-auto">
+        <table class="w-full text-sm border-collapse">
+          <thead>
+            <tr class="border-b border-white/10 text-text-primary">
+              <th class="text-left py-3 pr-4">Setting</th>
+              <th class="text-left py-3 pr-4">What it does</th>
+              <th class="text-left py-3">Recommended usage</th>
+            </tr>
+          </thead>
+          <tbody class="text-text-secondary">
+            <tr class="border-b border-white/5">
+              <td class="py-3 pr-4">Double-click auto paste</td>
+              <td class="py-3 pr-4">Double-click item to copy and paste into previous app, then hide window.</td>
+              <td class="py-3">Great for repetitive writing/support workflows.</td>
+            </tr>
+            <tr class="border-b border-white/5">
+              <td class="py-3 pr-4">Double-copy to Workbench</td>
+              <td class="py-3 pr-4">Press copy twice quickly to auto-pin content to workbench.</td>
+              <td class="py-3">Useful while browsing and collecting key snippets.</td>
+            </tr>
+            <tr class="border-b border-white/5">
+              <td class="py-3 pr-4">Global hotkeys</td>
+              <td class="py-3 pr-4">Open main panel, one-click copy and pin, etc.</td>
+              <td class="py-3">Avoid OS-reserved combinations.</td>
+            </tr>
+            <tr class="border-b border-white/5">
+              <td class="py-3 pr-4">Auto cleanup</td>
+              <td class="py-3 pr-4">Automatically remove old data by item limit and retention days.</td>
+              <td class="py-3">Start conservative, then tune down.</td>
+            </tr>
+            <tr class="border-b border-white/5">
+              <td class="py-3 pr-4">Accent color</td>
+              <td class="py-3 pr-4">Adjust UI accent theme color.</td>
+              <td class="py-3">Choose high contrast for readability.</td>
+            </tr>
+            <tr>
+              <td class="py-3 pr-4">Title bar wheel opacity</td>
+              <td class="py-3 pr-4">Scroll wheel over title bar to adjust transparency.</td>
+              <td class="py-3">Lower opacity when multitasking.</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </section>
 
-    <section class="max-w-4xl mx-auto mt-8 glass-card p-8">
-      <h2 class="text-2xl font-bold text-text-primary">3. Key Features</h2>
-      <div class="mt-5 space-y-6">
-        <div>
-          <h3 class="text-lg font-semibold text-text-primary">3.1 Search & Filtering</h3>
-          <p class="mt-2 text-text-secondary leading-7">Use full-text search, tags, and type filters to find content quickly.</p>
+    <section id="ai-ocr" class="max-w-5xl mx-auto mt-8 glass-card p-8">
+      <h2 class="text-2xl font-bold text-text-primary">5. AI / OCR / Sharing & Sync</h2>
+      <div class="mt-4 grid md:grid-cols-2 gap-6">
+        <div class="rounded-xl border border-white/10 p-5">
+          <h3 class="text-lg font-semibold text-text-primary">AI Tags</h3>
+          <p class="mt-2 text-text-secondary leading-7">Auto-tag clipboard entries after API setup for better organization.</p>
         </div>
-        <div>
-          <h3 class="text-lg font-semibold text-text-primary">3.2 AI Tagging</h3>
-          <p class="mt-2 text-text-secondary leading-7">After configuring an AI provider, Qollect can auto-tag entries for easier retrieval.</p>
+        <div class="rounded-xl border border-white/10 p-5">
+          <h3 class="text-lg font-semibold text-text-primary">OCR</h3>
+          <p class="mt-2 text-text-secondary leading-7">Extract searchable text from screenshots and image snippets.</p>
         </div>
-        <div>
-          <h3 class="text-lg font-semibold text-text-primary">3.3 OCR</h3>
-          <p class="mt-2 text-text-secondary leading-7">Extract text from images and make image-based content searchable.</p>
+        <div class="rounded-xl border border-white/10 p-5">
+          <h3 class="text-lg font-semibold text-text-primary">QR / Link Sharing</h3>
+          <p class="mt-2 text-text-secondary leading-7">Share selected content to mobile or teammates quickly.</p>
         </div>
-        <div>
-          <h3 class="text-lg font-semibold text-text-primary">3.4 View Modes</h3>
-          <p class="mt-2 text-text-secondary leading-7">Switch between Mini, List, Panel, and Overview modes based on your task.</p>
-        </div>
-        <div>
-          <h3 class="text-lg font-semibold text-text-primary">3.5 Share & Sync</h3>
-          <p class="mt-2 text-text-secondary leading-7">Use QR sharing, temporary file hosts, and LAN sync for multi-device flow.</p>
+        <div class="rounded-xl border border-white/10 p-5">
+          <h3 class="text-lg font-semibold text-text-primary">LAN Sync</h3>
+          <p class="mt-2 text-text-secondary leading-7">Discover and sync across devices on the same local network.</p>
         </div>
       </div>
+      <figure class="mt-6">
+        <img src={`${base}screenshots/ai-en.png`} alt="Qollect AI feature screenshot" class="w-full rounded-xl border border-white/10 shadow-xl" loading="lazy" />
+        <figcaption class="mt-2 text-xs text-text-muted">Configure providers first, then enable AI/OCR gradually</figcaption>
+      </figure>
     </section>
 
-    <section class="max-w-4xl mx-auto mt-8 glass-card p-8">
-      <h2 class="text-2xl font-bold text-text-primary">4. Privacy & Data</h2>
-      <ul class="mt-4 space-y-3 text-text-secondary leading-7 list-disc pl-5">
-        <li>Local-first by default. Core clipboard data is stored in local SQLite.</li>
-        <li>Automatic cleanup policy can be configured by item count and max age.</li>
-        <li>Import/export supports password-protected backups.</li>
-      </ul>
-    </section>
-
-    <section class="max-w-4xl mx-auto mt-8 glass-card p-8">
-      <h2 class="text-2xl font-bold text-text-primary">5. FAQ</h2>
+    <section id="faq" class="max-w-5xl mx-auto mt-8 glass-card p-8">
+      <h2 class="text-2xl font-bold text-text-primary">6. FAQ & Troubleshooting</h2>
       <div class="mt-5 space-y-5">
         <div>
-          <p class="font-semibold text-text-primary">Q: Clipboard items are not showing up. What should I check?</p>
-          <p class="mt-1 text-text-secondary leading-7">A: Ensure Qollect is running, then check OS permissions and other clipboard utilities for conflicts.</p>
+          <p class="font-semibold text-text-primary">Q: Copied content does not appear in history.</p>
+          <p class="mt-1 text-text-secondary leading-7">A: Ensure Qollect is running and check OS permissions/conflicting clipboard tools.</p>
         </div>
         <div>
-          <p class="font-semibold text-text-primary">Q: Shortcut is not working.</p>
-          <p class="mt-1 text-text-secondary leading-7">A: Most likely a global shortcut conflict. Change it in Settings to an unused key combination.</p>
+          <p class="font-semibold text-text-primary">Q: Double-click auto paste does not work.</p>
+          <p class="mt-1 text-text-secondary leading-7">A: Confirm the setting is enabled and the target app accepts simulated paste.</p>
         </div>
         <div>
-          <p class="font-semibold text-text-primary">Q: AI/OCR failed.</p>
-          <p class="mt-1 text-text-secondary leading-7">A: Verify API key, network access, and provider quota. Try a backup provider/model if needed.</p>
+          <p class="font-semibold text-text-primary">Q: Drag out fails for a specific app.</p>
+          <p class="mt-1 text-text-secondary leading-7">A: Some apps only accept specific drag payload types. Test with copy first.</p>
+        </div>
+        <div>
+          <p class="font-semibold text-text-primary">Q: Global shortcut not responding.</p>
+          <p class="mt-1 text-text-secondary leading-7">A: Most likely shortcut conflict. Rebind to an unused combo.</p>
+        </div>
+        <div>
+          <p class="font-semibold text-text-primary">Q: AI / OCR request fails.</p>
+          <p class="mt-1 text-text-secondary leading-7">A: Check API key, network, provider/model availability, and quota limits.</p>
         </div>
       </div>
     </section>
 
-    <section class="max-w-4xl mx-auto mt-8">
+    <section class="max-w-5xl mx-auto mt-8">
       <div class="glass-card p-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div>
-          <h2 class="text-xl font-bold text-text-primary">Need more help?</h2>
-          <p class="text-text-secondary mt-1">Open an issue with your scenario so we can improve Qollect faster.</p>
+          <h2 class="text-xl font-bold text-text-primary">Need scenario-specific help?</h2>
+          <p class="text-text-secondary mt-1">Open an issue with your workflow and we will keep this manual evolving.</p>
         </div>
         <div class="flex gap-3">
           <a class="btn-glow-outline text-sm" href={`${base}en#download`}>Back to Download</a>
