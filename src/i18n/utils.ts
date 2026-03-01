@@ -36,6 +36,24 @@ export function useTranslations(url: URL) {
 
 export function getAlternateUrl(url: URL): string {
   const lang = getLangFromUrl(url);
-  if (lang === 'zh-CN') return `${BASE}en`;
-  return BASE;
+  const pathname = url.pathname;
+  const relative = pathname.startsWith(BASE)
+    ? pathname.slice(BASE.length)
+    : pathname.replace(/^\//, '');
+
+  const searchAndHash = `${url.search}${url.hash}`;
+
+  if (lang === 'zh-CN') {
+    if (!relative) return `${BASE}en${searchAndHash}`;
+    return `${BASE}en/${relative}${searchAndHash}`;
+  }
+
+  if (relative === 'en') return `${BASE}${searchAndHash}`;
+  if (relative.startsWith('en/')) {
+    const next = relative.slice(3);
+    if (!next) return `${BASE}${searchAndHash}`;
+    return `${BASE}${next}${searchAndHash}`;
+  }
+
+  return `${BASE}${searchAndHash}`;
 }

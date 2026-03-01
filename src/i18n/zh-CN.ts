@@ -2,6 +2,7 @@ export const zhCN = {
   nav: {
     features: '功能',
     download: '下载',
+    help: '帮助',
     github: 'GitHub',
   },
   hero: {

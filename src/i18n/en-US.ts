@@ -2,6 +2,7 @@ export const enUS = {
   nav: {
     features: 'Features',
     download: 'Download',
+    help: 'Help',
     github: 'GitHub',
   },
   hero: {
