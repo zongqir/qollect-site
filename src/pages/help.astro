@@ -30,7 +30,7 @@ const base = import.meta.env.BASE_URL;
       <div class="mt-5 grid md:grid-cols-2 gap-3 text-sm">
         <a href="#quick-start" class="px-4 py-3 rounded-xl border border-white/10 hover:border-accent-blue/60 text-text-secondary hover:text-text-primary transition-all">1. 快速开始</a>
         <a href="#workflow" class="px-4 py-3 rounded-xl border border-white/10 hover:border-accent-blue/60 text-text-secondary hover:text-text-primary transition-all">2. 高频工作流</a>
-        <a href="#drag-flow" class="px-4 py-3 rounded-xl border border-white/10 hover:border-accent-blue/60 text-text-secondary hover:text-text-primary transition-all">3. 拖入拖出（重点）</a>
+        <a href="#drag-flow" class="px-4 py-3 rounded-xl border border-white/10 hover:border-accent-blue/60 text-text-secondary hover:text-text-primary transition-all">3. 拖入拖出</a>
         <a href="#settings" class="px-4 py-3 rounded-xl border border-white/10 hover:border-accent-blue/60 text-text-secondary hover:text-text-primary transition-all">4. 设置中心详解</a>
         <a href="#ai-ocr" class="px-4 py-3 rounded-xl border border-white/10 hover:border-accent-blue/60 text-text-secondary hover:text-text-primary transition-all">5. AI / OCR / 分享同步</a>
         <a href="#faq" class="px-4 py-3 rounded-xl border border-white/10 hover:border-accent-blue/60 text-text-secondary hover:text-text-primary transition-all">6. 常见问题与排障</a>
@@ -46,8 +46,8 @@ const base = import.meta.env.BASE_URL;
         <li>滚动标题栏滚轮，体验窗口透明度调整（适合边看边工作）。</li>
       </ol>
       <figure class="mt-6">
-        <img src={`${base}screenshots/full-zh.png`} alt="Qollect 完整视图截图" class="w-full rounded-xl border border-white/10 shadow-xl" loading="lazy" />
-        <figcaption class="mt-2 text-xs text-text-muted">完整视图：历史区 + 面板区 + 工作台入口</figcaption>
+        <img src={`${base}screenshots/help-main-zh.png`} alt="Qollect 完整视图截图" class="w-full rounded-xl border border-white/10 shadow-xl" loading="lazy" />
+        <figcaption class="mt-2 text-xs text-text-muted">主界面：历史区、筛选工具栏与工作台区</figcaption>
       </figure>
     </section>
 
@@ -66,7 +66,7 @@ const base = import.meta.env.BASE_URL;
     </section>
 
     <section id="drag-flow" class="max-w-5xl mx-auto mt-8 glass-card p-8">
-      <h2 class="text-2xl font-bold text-text-primary">3. 拖入拖出（你提到的重点功能）</h2>
+      <h2 class="text-2xl font-bold text-text-primary">3. 拖入拖出</h2>
       <div class="mt-4 space-y-5 text-text-secondary leading-7">
         <div>
           <h3 class="text-lg font-semibold text-text-primary">3.1 拖入 Qollect</h3>
@@ -91,7 +91,7 @@ const base = import.meta.env.BASE_URL;
     </section>
 
     <section id="settings" class="max-w-5xl mx-auto mt-8 glass-card p-8">
-      <h2 class="text-2xl font-bold text-text-primary">4. 设置中心详解（含你提到的双击复制等）</h2>
+      <h2 class="text-2xl font-bold text-text-primary">4. 设置中心详解</h2>
       <div class="mt-5 overflow-x-auto">
         <table class="w-full text-sm border-collapse">
           <thead>
@@ -135,9 +135,32 @@ const base = import.meta.env.BASE_URL;
           </tbody>
         </table>
       </div>
-      <p class="mt-5 text-sm text-text-muted">
-        说明：你提到的“修改颜色”和“滑动透明”都属于高频易感知功能，建议在新用户引导中优先展示。
-      </p>
+      <div class="mt-6 grid md:grid-cols-2 gap-4">
+        <figure>
+          <img src={`${base}screenshots/help-settings-general-zh.png`} alt="设置总览（通用）" class="w-full rounded-xl border border-white/10 shadow-xl" loading="lazy" />
+          <figcaption class="mt-2 text-xs text-text-muted">设置总览：语言、主题、强调色与核心开关</figcaption>
+        </figure>
+        <figure>
+          <img src={`${base}screenshots/help-settings-general-detail-zh.png`} alt="设置通用详情" class="w-full rounded-xl border border-white/10 shadow-xl" loading="lazy" />
+          <figcaption class="mt-2 text-xs text-text-muted">通用设置细节：双击自动粘贴、悬浮小球、低内存模式</figcaption>
+        </figure>
+        <figure>
+          <img src={`${base}screenshots/help-settings-shortcuts-zh.png`} alt="设置快捷键" class="w-full rounded-xl border border-white/10 shadow-xl" loading="lazy" />
+          <figcaption class="mt-2 text-xs text-text-muted">快捷键设置：呼出窗口、复制增强与录制快捷键</figcaption>
+        </figure>
+        <figure>
+          <img src={`${base}screenshots/help-settings-data-security-zh.png`} alt="设置数据与安全" class="w-full rounded-xl border border-white/10 shadow-xl" loading="lazy" />
+          <figcaption class="mt-2 text-xs text-text-muted">数据与安全：清理策略、导入导出、隐私相关配置</figcaption>
+        </figure>
+        <figure>
+          <img src={`${base}screenshots/help-settings-integrations-zh.png`} alt="设置可选功能" class="w-full rounded-xl border border-white/10 shadow-xl" loading="lazy" />
+          <figcaption class="mt-2 text-xs text-text-muted">可选功能：AI、OCR、MCP、局域网同步与分享</figcaption>
+        </figure>
+        <figure>
+          <img src={`${base}screenshots/help-settings-about-zh.png`} alt="设置关于页" class="w-full rounded-xl border border-white/10 shadow-xl" loading="lazy" />
+          <figcaption class="mt-2 text-xs text-text-muted">关于页：版本信息、更新与项目入口</figcaption>
+        </figure>
+      </div>
     </section>
 
     <section id="ai-ocr" class="max-w-5xl mx-auto mt-8 glass-card p-8">
@@ -207,3 +230,5 @@ const base = import.meta.env.BASE_URL;
   </main>
   <Footer />
 </Layout>
+
+

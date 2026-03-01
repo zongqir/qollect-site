@@ -47,8 +47,8 @@ const base = import.meta.env.BASE_URL;
         <li>Use mouse wheel over title bar to adjust window transparency.</li>
       </ol>
       <figure class="mt-6">
-        <img src={`${base}screenshots/full-en.png`} alt="Qollect full view screenshot" class="w-full rounded-xl border border-white/10 shadow-xl" loading="lazy" />
-        <figcaption class="mt-2 text-xs text-text-muted">Full view: history area + detail panel + workbench entry</figcaption>
+        <img src={`${base}screenshots/help-main-en.png`} alt="Qollect full view screenshot" class="w-full rounded-xl border border-white/10 shadow-xl" loading="lazy" />
+        <figcaption class="mt-2 text-xs text-text-muted">Main view: history stream, filters, and workbench area</figcaption>
       </figure>
     </section>
 
@@ -136,6 +136,32 @@ const base = import.meta.env.BASE_URL;
           </tbody>
         </table>
       </div>
+      <div class="mt-6 grid md:grid-cols-2 gap-4">
+        <figure>
+          <img src={`${base}screenshots/help-settings-general-en.png`} alt="Settings overview general" class="w-full rounded-xl border border-white/10 shadow-xl" loading="lazy" />
+          <figcaption class="mt-2 text-xs text-text-muted">General settings overview: language, theme, accent, key toggles</figcaption>
+        </figure>
+        <figure>
+          <img src={`${base}screenshots/help-settings-general-detail-en.png`} alt="Settings general details" class="w-full rounded-xl border border-white/10 shadow-xl" loading="lazy" />
+          <figcaption class="mt-2 text-xs text-text-muted">General details: double-click auto paste, floating widget, low memory mode</figcaption>
+        </figure>
+        <figure>
+          <img src={`${base}screenshots/help-settings-shortcuts-en.png`} alt="Settings shortcuts" class="w-full rounded-xl border border-white/10 shadow-xl" loading="lazy" />
+          <figcaption class="mt-2 text-xs text-text-muted">Shortcut settings: toggle window, copy enhancement, recording flow</figcaption>
+        </figure>
+        <figure>
+          <img src={`${base}screenshots/help-settings-data-security-en.png`} alt="Settings data and security" class="w-full rounded-xl border border-white/10 shadow-xl" loading="lazy" />
+          <figcaption class="mt-2 text-xs text-text-muted">Data and security: retention, import/export, privacy-related options</figcaption>
+        </figure>
+        <figure>
+          <img src={`${base}screenshots/help-settings-integrations-en.png`} alt="Settings optional features" class="w-full rounded-xl border border-white/10 shadow-xl" loading="lazy" />
+          <figcaption class="mt-2 text-xs text-text-muted">Optional features: AI, OCR, MCP, LAN sync, sharing</figcaption>
+        </figure>
+        <figure>
+          <img src={`${base}screenshots/help-settings-about-en.png`} alt="Settings about" class="w-full rounded-xl border border-white/10 shadow-xl" loading="lazy" />
+          <figcaption class="mt-2 text-xs text-text-muted">About page: version, update, project links</figcaption>
+        </figure>
+      </div>
     </section>
 
     <section id="ai-ocr" class="max-w-5xl mx-auto mt-8 glass-card p-8">
@@ -205,3 +231,5 @@ const base = import.meta.env.BASE_URL;
   </main>
   <Footer />
 </Layout>
+
+
