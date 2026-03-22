@@ -1,13 +1,13 @@
 export const enUS = {
   nav: {
-    features: 'Features',
+    features: 'Why Qollect',
     download: 'Download',
     help: 'Help',
     github: 'GitHub',
   },
   hero: {
-    title: 'Effortless mark. Instant recall.',
-    subtitle: 'A modern cross-platform clipboard manager that turns copy-paste into a superpower.',
+    title: 'Keep what you copy within reach',
+    subtitle: 'Qollect helps you recover, organize, and resend the links, replies, screenshots, and files you just copied, with less searching and less repetition.',
     downloadFor: 'Download for',
     windows: 'Windows',
     macos: 'macOS',
@@ -15,61 +15,46 @@ export const enUS = {
     starOnGithub: 'Star on GitHub',
   },
   features: {
-    sectionTitle: 'Core Features',
-    history: {
-      title: 'Smart History',
-      description: 'Automatically captures clipboard content with intelligent deduplication. Supports text, images, and files. All data stored locally for privacy.',
+    sectionTitle: 'Find faster. Switch less. Repeat less.',
+    recall: {
+      title: 'Find faster',
+      description: 'Copied something ten minutes ago? Pull it back quickly instead of retracing tabs, chats, and documents.',
     },
-    ai: {
-      title: 'AI Powered',
-      description: 'Smart tagging with automatic categorization. Multi-provider AI support for intelligent content classification and quick retrieval.',
+    atHand: {
+      title: 'Switch less',
+      description: 'Keep the next replies, links, and references on your workbench so they stay within reach while you work.',
     },
-    workbench: {
-      title: 'Workbench',
-      description: 'Pin important content to your workbench. Drag and drop to organize. Build your personal content collection.',
-    },
-    crossPlatform: {
-      title: 'Cross-Platform',
-      description: 'Unified experience across Windows, macOS, and Linux. Built with Rust + Tauri for native performance and minimal resource usage.',
+    reuse: {
+      title: 'Repeat less',
+      description: 'Collect once and send again with less friction across text, images, and files.',
     },
   },
   grid: {
-    sectionTitle: 'More Features',
+    sectionTitle: 'Enhance when needed',
+    subtitle: 'AI, OCR, sharing, and sync are here when your workflow grows, but they are not the main story.',
     ocr: {
       title: 'OCR Recognition',
-      description: 'Extract text from images instantly',
+      description: 'Pull text out of images when you need it',
     },
     mcp: {
       title: 'MCP Integration',
-      description: 'AI assistants access your clipboard',
+      description: 'Connect AI assistants to your content flow',
     },
     quickInput: {
       title: 'Quick Input',
-      description: 'Hotkey to summon, select and use',
+      description: 'Bring it up with a hotkey and use it fast',
     },
     miniMode: {
       title: 'Mini Mode',
-      description: 'Floating window, stays out of the way',
+      description: 'Keep a floating window nearby without losing focus',
     },
     lanSync: {
       title: 'LAN Sync',
-      description: 'Seamless sharing across devices',
+      description: 'Share more smoothly across devices on your network',
     },
     qrShare: {
       title: 'QR Share',
-      description: 'Scan to get content instantly',
-    },
-    autoUpdate: {
-      title: 'Auto Update',
-      description: 'Silent check, one-click upgrade',
-    },
-    importExport: {
-      title: 'Import/Export',
-      description: 'Free data migration and backup',
-    },
-    i18n: {
-      title: 'i18n',
-      description: 'Chinese & English, easy switch',
+      description: 'Hand content off quickly to another device',
     },
   },
   tech: {
@@ -86,7 +71,7 @@ export const enUS = {
     linux: 'Linux (Coming Soon)',
   },
   footer: {
-    slogan: 'Effortless mark. Instant recall.',
+    slogan: 'Keep what you copy within reach',
     copyright: 'Qollect.',
   },
   lang: {

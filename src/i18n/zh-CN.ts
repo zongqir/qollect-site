@@ -1,13 +1,13 @@
 export const zhCN = {
   nav: {
-    features: '功能',
+    features: '价值',
     download: '下载',
     help: '帮助',
     github: 'GitHub',
   },
   hero: {
-    title: '无感标记，一触即回',
-    subtitle: '现代化跨平台剪贴板管理器，让复制粘贴成为超能力',
+    title: '把散落的复制内容，留在手边',
+    subtitle: 'Qollect 帮你找回、整理并再次发出刚刚复制过的链接、回复、截图和文件，少一点翻找，少一点重复。',
     downloadFor: '下载',
     windows: 'Windows',
     macos: 'macOS',
@@ -15,61 +15,46 @@ export const zhCN = {
     starOnGithub: 'Star on GitHub',
   },
   features: {
-    sectionTitle: '核心功能',
-    history: {
-      title: '智能历史',
-      description: '自动捕获剪贴板内容，智能去重，支持文本、图片、文件多种类型。所有数据本地存储，隐私安全。',
+    sectionTitle: '少找，少切，少重复',
+    recall: {
+      title: '少找',
+      description: '复制过的内容，之后还能快速找回来。历史流负责接住这些短期信息。',
     },
-    ai: {
-      title: 'AI 赋能',
-      description: '智能标签自动分类，支持多家 AI 供应商。让剪贴板内容自动归类，快速检索。',
+    atHand: {
+      title: '少切',
+      description: '把接下来要用的回复、链接和资料放到工作区，减少在聊天、文档和浏览器之间来回跳。',
     },
-    workbench: {
-      title: '工作台',
-      description: '固定重要内容到工作台，拖拽整理排序。打造你的专属内容收藏夹。',
-    },
-    crossPlatform: {
-      title: '跨平台',
-      description: 'Windows、macOS、Linux 统一体验。基于 Rust + Tauri 构建，原生性能，极低资源占用。',
+    reuse: {
+      title: '少重复',
+      description: '一次收集，多次使用。文本、图片和文件都能更顺手地再次发出去。',
     },
   },
   grid: {
-    sectionTitle: '更多特性',
+    sectionTitle: '按需增强',
+    subtitle: 'AI、OCR、同步这些能力都在，但它们应该是增强项，不该盖过主价值。',
     ocr: {
       title: 'OCR 识别',
-      description: '图片文字一键提取',
+      description: '需要时再把图片里的文字提出来',
     },
     mcp: {
       title: 'MCP 集成',
-      description: 'AI 助手直接访问剪贴板',
+      description: '让 AI 助手接入你的内容流',
     },
     quickInput: {
       title: '快速输入',
-      description: '快捷键呼出，即选即用',
+      description: '快捷键呼出，立刻取用',
     },
     miniMode: {
       title: '迷你模式',
-      description: '悬浮窗口，不遮挡工作',
+      description: '悬浮在手边，但不挡事',
     },
     lanSync: {
       title: '局域网同步',
-      description: '多设备无缝共享',
+      description: '在局域网里更顺手地共享',
     },
     qrShare: {
       title: '二维码分享',
-      description: '扫码即可获取内容',
-    },
-    autoUpdate: {
-      title: '自动更新',
-      description: '静默检查，一键升级',
-    },
-    importExport: {
-      title: '导入导出',
-      description: '数据自由迁移备份',
-    },
-    i18n: {
-      title: '国际化',
-      description: '中英双语，轻松切换',
+      description: '把内容快速交给另一台设备',
     },
   },
   tech: {
@@ -86,7 +71,7 @@ export const zhCN = {
     linux: 'Linux (敬请期待)',
   },
   footer: {
-    slogan: '无感标记，一触即回',
+    slogan: '把散落的复制内容，留在手边',
     copyright: 'Qollect.',
   },
   lang: {
