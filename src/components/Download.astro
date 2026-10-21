@@ -4,7 +4,26 @@ import { useTranslations } from '../i18n/utils';
 
 const t = useTranslations(Astro.url);
 
-const FALLBACK_VERSION = packageJson.version;
+const R2_BASE = 'https://dl.zongqir.com';
+let initialVersion = packageJson.version;
+let initialWindowsUrl = `${R2_BASE}/releases/v${initialVersion}/Qollect_${initialVersion}_x64-setup.exe`;
+let initialMacosUrl = `${R2_BASE}/releases/v${initialVersion}/Qollect_universal.app.tar.gz`;
+
+try {
+  const res = await fetch(`${R2_BASE}/latest.json`, { signal: AbortSignal.timeout(3000) });
+  if (res.ok) {
+    const data = await res.json();
+    const v = String(data.version || '').replace(/^v/, '');
+    if (v) {
+      initialVersion = v;
+      const platforms = data.platforms || {};
+      initialWindowsUrl = platforms['windows-x86_64-nsis']?.url || platforms['windows-x86_64']?.url || `${R2_BASE}/releases/v${v}/Qollect_${v}_x64-setup.exe`;
+      initialMacosUrl = platforms['darwin-universal']?.url || platforms['darwin-universal-app']?.url || `${R2_BASE}/releases/v${v}/Qollect_universal.app.tar.gz`;
+    }
+  }
+} catch {
+  // Use package.json fallback
+}
 
 const icons = {
   windows: `<svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg>`,
@@ -19,17 +38,17 @@ const icons = {
   </h2>
   <p class="text-text-secondary mb-2 animate-on-scroll">{t('download.subtitle')}</p>
   <p class="text-sm text-text-muted mb-12 animate-on-scroll">
-    {t('download.version')}: <span id="dl-version">v{FALLBACK_VERSION}</span>
+    {t('download.version')}: <span id="dl-version">v{initialVersion}</span>
   </p>
 
   <div class="flex flex-wrap items-center justify-center gap-6 animate-on-scroll">
-    <a id="dl-windows" href={`https://dl.135070.xyz/releases/v${FALLBACK_VERSION}/Qollect_${FALLBACK_VERSION}_x64-setup.exe`}
+    <a id="dl-windows" href={initialWindowsUrl}
       target="_blank" rel="noopener noreferrer"
       class="btn-glow inline-flex items-center gap-3 px-8 py-4 text-lg">
       <Fragment set:html={icons.windows} />
       {t('download.windows')}
     </a>
-    <a id="dl-macos" href={`https://dl.135070.xyz/releases/v${FALLBACK_VERSION}/Qollect_universal.app.tar.gz`}
+    <a id="dl-macos" href={initialMacosUrl}
       target="_blank" rel="noopener noreferrer"
       class="btn-glow inline-flex items-center gap-3 px-8 py-4 text-lg">
       <Fragment set:html={icons.macos} />
@@ -43,7 +62,7 @@ const icons = {
 </section>
 
 <script>
-  const R2_BASE = 'https://dl.135070.xyz';
+  const R2_BASE = 'https://dl.zongqir.com';
 
   fetch(`${R2_BASE}/latest.json?t=${Date.now()}`, { cache: 'no-store' })
     .then(r => {
@@ -54,7 +73,8 @@ const icons = {
       const version = String(data.version || '').replace(/^v/, '');
       if (!version) return;
 
-      document.getElementById('dl-version').textContent = `v${version}`;
+      const versionEl = document.getElementById('dl-version');
+      if (versionEl) versionEl.textContent = `v${version}`;
 
       const base = `${R2_BASE}/releases/v${version}`;
       const platforms = data.platforms || {};
@@ -64,7 +84,7 @@ const icons = {
       };
       for (const [id, href] of Object.entries(links)) {
         const el = document.getElementById(id);
-        if (el) el.href = href;
+        if (el && href) el.href = href;
       }
     })
     .catch((error) => {
