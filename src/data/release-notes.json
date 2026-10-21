@@ -1,0 +1,969 @@
+{
+  "changelogUrl": "https://qollect.zongqir.com/changelog",
+  "releases": [
+    {
+      "version": "0.5.14",
+      "publishedAt": "2026-10-21",
+      "changelogUrl": "https://qollect.zongqir.com/changelog#v0-5-14",
+      "summary": {
+        "zh-CN": "加强临时分享安全防御，对接专属客户端鉴权与防刷机制，修复 403 客户端未授权拦截问题。",
+        "en-US": "Enhanced ephemeral share security with dedicated client authentication and rate-limiting integration, resolving 403 unauthorized client errors."
+      },
+      "highlights": {
+        "zh-CN": [
+          "客户端专属安全指纹：临时分享上传请求携带专属客户端认证标识，与边缘 WAF 和 Worker 联动，阻断未授权的恶意爬虫和自动化探测脚本。",
+          "分享中继配额防护与体积熔断：加密中继负载上限收敛至 2MB，结合 Cloudflare 边缘 Rate Limiting（10 秒 5 次），彻底消除共享中继被异常高频并发刷穿配额的隐患。",
+          "修复 403 未授权拦截：修复桌面端在发起中继分享时因未携带合法客户端凭据而被云端拦截（Relay upload failed: 403）的问题。",
+          "自建部署指引云端化：设置中的自建部署文档链接全面迁移至 Cloudflare 全球边缘托管页（https://qollect-share.zongqir.com/docs），去除私有服务器依赖与地址暴露。"
+        ],
+        "en-US": [
+          "Dedicated Client Security Fingerprint: Ephemeral share upload requests now carry dedicated client authentication headers to coordinate with Cloudflare edge WAF and Worker defenses, blocking unauthorized scraping bots and probe scripts.",
+          "Relay Quota Defense & Payload Limit: Refined the encrypted relay payload ceiling to 2MB, combined with Cloudflare edge rate limiting (5 requests per 10s) to completely safeguard against quota exhaustion.",
+          "Fix 403 Unauthorized Relay Errors: Resolved the 403 Forbidden failure when uploading encrypted payloads to the share relay by establishing authenticated desktop client transmission.",
+          "Cloudflare-Hosted Deployment Docs: Migrated the self-hosting setup guide to the Cloudflare Anycast edge endpoint (https://qollect-share.zongqir.com/docs), removing reliance on private file hosts."
+        ]
+      }
+    },
+    {
+      "version": "0.5.13",
+      "publishedAt": "2026-10-20",
+      "changelogUrl": "https://qollect.zongqir.com/changelog#v0-5-13",
+      "summary": {
+        "zh-CN": "重构跨设备分享架构，根除扫码乱码与心智负担，上线端到端加密（E2EE）10分钟阅后即焚中继服务。",
+        "en-US": "Overhauled cross-device sharing with end-to-end encryption (E2EE) and ephemeral relays, eliminating QR scanning corruption and configuration friction."
+      },
+      "highlights": {
+        "zh-CN": [
+          "二维码底层重构与乱码根治：彻底移除干扰现代扫码器的 ECI 声明，采用标准原生 UTF-8 字节流；容错率降为 Level L，大幅稀疏化点阵，消除屏幕摩尔纹干扰，微信与主流手机相机原生秒扫直读文本。",
+          "分级分享策略与零心智负担：≤150 汉字短文本强制走纯离线原生二维码（0 流量、秒出、数据不出设备）；长文本与多媒体自动走端到端加密中继；彻底废除复杂的“Unicode 文本兼容模式”勾选框。",
+          "端到端加密（E2EE）跨网分享：淘汰不稳定的第三方匿名图床和 S3，上线基于 Cloudflare Workers 的开源临时中继架构；数据在本地通过 AES-256-GCM 硬件级加密，解密 Key 仅存在于二维码 URL Hash 中，服务器无权解密，10 分钟后物理自动销毁。",
+          "极简设置与自建指引：设置页全面精简，默认内置极速中继服务（qollect-share.zongqir.com），支持自定义端点与一键连通性测试，并内置提供一键直达的自建部署开源文档。"
+        ],
+        "en-US": [
+          "QR Code Overhaul & Corruption Fix: Removed legacy ECI headers in favor of clean native UTF-8 byte streams; switched to EcLevel::L to reduce module density and prevent screen moiré interference, allowing instant recognition on WeChat and system cameras.",
+          "Size-Based Adaptive Sharing: Short text (≤150 Chinese chars) renders as pure offline QR codes with zero network traffic; long text and media automatically trigger E2EE relay. Dropped the redundant Unicode compatibility checkbox to remove cognitive friction.",
+          "End-to-End Encrypted (E2EE) Ephemeral Relay: Retired unstable public file hosts and heavy S3 configurations in favor of a lightweight Cloudflare Worker relay. Content is encrypted locally via AES-256-GCM with keys isolated in the URL hash, physically purged in 10 minutes.",
+          "Streamlined Settings & Self-Hosting Guide: Cleaned up the settings interface with built-in default relay (qollect-share.zongqir.com), custom endpoint support, connectivity testing, and a direct link to the 3-minute self-hosting deployment guide."
+        ]
+      }
+    },
+    {
+      "version": "0.5.12",
+      "publishedAt": "2026-10-19",
+      "changelogUrl": "https://qollect.zongqir.com/changelog#v0-5-12",
+      "summary": {
+        "zh-CN": "引入时间戳与日期时间卡片时钟语义化图标，精简右键上下文菜单并移除表层冗余操作。",
+        "en-US": "Introduced semantic clock icons for timestamps and date-time items, and streamlined the context menu by removing redundant surface actions."
+      },
+      "highlights": {
+        "zh-CN": [
+          "时间戳与日期时间智能识别与时钟图标：建立精确的离散时间格式门禁（覆盖 10/13 位 Unix 时间戳、ISO 8601、年月日时分秒等标准格式），历史流、工作区与收藏区卡片类型图标智能升级为时钟（Clock3），预览面板同步识别展示为“时间”类型。",
+          "右键上下文菜单深度降噪：移除与卡片表层交互重叠的“收藏”和“预览详情”菜单项，右键菜单高度缩减 68px，降低 Mini 窄窗模式下的翻折遮挡风险，聚焦纯文本复制、多选、编辑备注/标签等核心二级特化操作。"
+        ],
+        "en-US": [
+          "Smart Timestamp & Date-Time Recognition: Added discrete datetime detection covering 10/13-digit Unix timestamps, ISO 8601, and standard date formats. Card icons in history, workbench, and collections now dynamically display a Clock3 icon, and the preview panel accurately labels them as Time.",
+          "Streamlined Right-Click Context Menu: Removed redundant Favorite and Preview items that duplicate card-surface actions, reducing menu height by 68px to prevent overflow in Mini mode and keeping focus on specialized actions like plain text copying, multi-selection, and note editing."
+        ]
+      }
+    },
+    {
+      "version": "0.5.11",
+      "publishedAt": "2026-10-19",
+      "changelogUrl": "https://qollect.zongqir.com/changelog#v0-5-11",
+      "summary": {
+        "zh-CN": "新增 cURL Cookie 一键提取与调试器浅色模式对比度修复，优化翻译卡片视觉去噪与编辑备注视口抬升交互。",
+        "en-US": "Added one-click cURL Cookie extraction and fixed runner theme contrast, alongside translation card visual cleanup and auto-elevating edit modal inputs."
+      },
+      "highlights": {
+        "zh-CN": [
+          "cURL Cookie 一键提取与解析：支持智能解析 -b / --cookie 参数与请求头中的 Cookie，并在调试面板快捷操作栏增加一键复制 Cookie 按钮。",
+          "cURL 调试器主题对比度与设计令牌修复：彻底重构输入框与调试面板的背景与文字配色，清除深色硬编码回退，全面适配浅色与深色模式，杜绝黑底黑字问题。",
+          "翻译卡片视觉去噪与类型图标升级：移除历史流与收藏流卡片顶部突兀的独立文字药丸及空余留白，含译文条目的类型图标智能提升为多语言 Languages 图标，呈现更自然清爽。",
+          "编辑备注与标签视口自动平滑抬升：当长文本卡片打开编辑弹窗时，表单编辑区自动平滑滚动并抬升至舒适视野，彻底消除长文本下操作区域被挤出屏幕底部的困扰。"
+        ],
+        "en-US": [
+          "cURL Cookie Extraction: Parses -b / --cookie arguments and Cookie headers from cURL commands, providing a dedicated one-click Copy Cookie button in the action bar.",
+          "cURL Runner Theme Contrast Fix: Overhauled CSS variables with standardized design tokens, eliminating dark-on-dark text in light mode and ensuring crystal-clear readability.",
+          "Translation UI Polish & Semantic Icons: Removed excessive translation pill badges and redundant whitespace on cards, elevating item type icons to a Languages icon when translations are present.",
+          "Auto-Scrolling & Form Elevation in Edit Modal: Automatically scrolls and lifts the note and tag editing section into optimal view on long-content cards, preventing inputs from being pushed off-screen."
+        ]
+      }
+    },
+    {
+      "version": "0.5.10",
+      "publishedAt": "2026-10-18",
+      "changelogUrl": "https://qollect.zongqir.com/changelog#v0-5-10",
+      "summary": {
+        "zh-CN": "新增剪贴板静默 AI 智能翻译与语言守卫过滤机制，并引入 cURL 命令行智能识别与轻量请求执行器。",
+        "en-US": "Added background silent AI translation with smart code/command guards, along with cURL command detection and a mini request runner."
+      },
+      "highlights": {
+        "zh-CN": [
+          "剪贴板静默 AI 翻译：后台无缝异步翻译复制的文本内容并写入条目元数据，在历史流与收藏区卡片提供一键切换原文/译文及快速复制译文功能。",
+          "智能翻译守卫机制：自动识别并跳过代码片段、Shell 指令、URL 链接、文件路径、驼峰/下划线标识符及哈希值，精准保护技术文本，杜绝误翻与 Token 浪费。",
+          "预览面板多语言呈现：在详情预览区内原生挂载译文卡片与语言方向指示器，支持快速复制译文到剪贴板。",
+          "cURL 命令智能识别与 Mini 请求调试：剪贴板检测到 cURL 命令时自动解析出请求方法、URL、Headers 与 Body，支持在界面中快速执行请求并直观查看响应结果与耗时。",
+          "集成设置能力扩充：在设置面板的 AI 模块中新增静默自动翻译开关及自定义源语言与目标语言配置。"
+        ],
+        "en-US": [
+          "Silent AI Clipboard Translation: Seamlessly translates copied text in the background, offering quick toggle between original and translated text and instant translation copying on history and collection cards.",
+          "Smart Translation Guard: Automatically identifies and filters out code snippets, shell commands, URLs, file paths, camelCase/snake_case identifiers, and hashes, preventing erroneous translations and token waste.",
+          "Preview Panel Translation View: Displays a dedicated translation card with language pair indicators inside the preview panel for easy reading and one-click translation copying.",
+          "cURL Detection & Mini Runner: Automatically parses cURL commands into structured methods, headers, and payloads, enabling quick request execution and inline response inspection.",
+          "Enhanced AI Settings: Added configurable silent auto-translation toggles along with customizable source and target language pairs in the Integrations panel."
+        ]
+      }
+    },
+    {
+      "version": "0.5.9",
+      "publishedAt": "2026-10-18",
+      "changelogUrl": "https://qollect.zongqir.com/changelog#v0-5-9",
+      "summary": {
+        "zh-CN": "修复文本对比在 Mini 模式与收藏区下的调用阻断，重构对比数据源持久化与多选栏布局遮挡问题。",
+        "en-US": "Resolved text comparison blockages in Mini and Collection modes, and rebuilt source item persistence to eliminate lookup failures."
+      },
+      "highlights": {
+        "zh-CN": [
+          "Mini 模式对比全屏自适应：解禁 Mini 模式下点击对比与快捷键的拦截阻断，全屏沉浸呈现对比面板，并针对窄窗优化单列上下滚动阅读与紧凑操作栏。",
+          "收藏区多选对比无缝打通：修复多选对比候选池脱离收藏流的问题，支持在收藏区直接勾选卡片秒开差异对比。",
+          "搜索与异步条目对比数据零丢失：在状态机中引入对比源条目全局持久化，彻底消除因全局索引未收录导致对比面板找不到条目的缺陷。",
+          "对比界面层级与退出还原优化：对比模式激活时自动隐退多选浮动底栏杜绝遮挡操作，返回时精准还原进入前的单栏或双栏布局预设。"
+        ],
+        "en-US": [
+          "Mini Mode Fullscreen Comparison: Eliminated hardcoded mini-mode interception, enabling responsive full-panel comparison with single-column scrolling and compact action controls.",
+          "Collection Stream Compare Integration: Fixed candidate selection pool decoupling from collection items, allowing multi-selected favorite cards to launch side-by-side diffing seamlessly.",
+          "Zero Data Loss for Dynamic & Search Items: Introduced persistent source item caching in the store to eliminate missing item errors when comparing search results or lazy-loaded cards.",
+          "Clean Overlay Layering & Layout Restoration: Automatically dismissed floating multi-select bar during comparison to prevent action obstruction, with precise single/dual-pane layout restoration on exit."
+        ]
+      }
+    },
+    {
+      "version": "0.5.8",
+      "publishedAt": "2026-10-18",
+      "changelogUrl": "https://qollect.zongqir.com/changelog#v0-5-8",
+      "summary": {
+        "zh-CN": "彻底修复预览面板返回按钮状态死锁，优化 Windows 划词复制按键时序以杜绝输入法拦截冲突。",
+        "en-US": "Completely resolved preview back button deadlock, and optimized Windows copy-on-select key event timing to prevent IME interception."
+      },
+      "highlights": {
+        "zh-CN": [
+          "预览返回列表死锁彻底根治：修复在 Mini 模式与单栏模式下点击返回按钮无法退出预览界面的严重缺陷；首帧同步响应内容关闭，即刻卸载空预览并恢复主列表挂载。",
+          "退出预览精准还原视图布局：重构预览返回调度机制，自动根据进入前的单栏（纯历史流）、双栏或右栏工作区状态无缝恢复窗口布局。",
+          "划词复制按键时序与输入法解耦：重构 Windows 原生按键发送链路，引入硬件扫描码与时序微延迟，杜绝选中文本或双击触发复制时向输入法误敲字母「c」的痛点。"
+        ],
+        "en-US": [
+          "Eliminated Preview Back Button Deadlock: Fixed a critical state-lock issue where clicking back from preview failed to return to the history stream in Mini and single-column modes; enforced synchronous unmounting of empty preview panes and immediate restoration of the card stream.",
+          "Accurate View Layout Restoration: Rebuilt the preview exit pipeline to seamlessly restore the previous layout mode (single-column stream, dual-pane, or right workbench) upon leaving preview.",
+          "Decoupled Copy-on-Select from IME Interception: Rebuilt native Windows key event dispatching with hardware scan codes and precision timing separation, eliminating stray 'c' keystroke pollution into active input methods."
+        ]
+      }
+    },
+    {
+      "version": "0.5.7",
+      "publishedAt": "2026-10-18",
+      "changelogUrl": "https://qollect.zongqir.com/changelog#v0-5-7",
+      "summary": {
+        "zh-CN": "历史流虚拟列表冷启动防塌陷与卡片白屏死锁彻底修复，优化收藏流与历史流紧凑度一致性体验。",
+        "en-US": "Completely eliminated history stream virtual list blank screen deadlock & flex collapse, and aligned compact layout density between collection and history streams."
+      },
+      "highlights": {
+        "zh-CN": [
+          "历史流虚拟列表白屏死锁根治：彻底修复在冷启动、搜索/收藏模式快速切换或 Flex 容器初始高度计算为 0 时导致 Virtuoso 陷入零条目永久白板的严重缺陷；通过预设 initialItemCount 与容器 100% 高度约束，确保卡片首帧即刻稳定直出。",
+          "虚拟滚动内部组件与视口预加载优化：静态化与记忆化 Virtuoso 核心组件配置（Scroller / Footer / increaseViewportBy），消除由于 Store 状态变动触发的内联对象重评估与滚动抖动。",
+          "收藏夹与历史流疏密紧凑度完全对齐：统一调优收藏列表在全模式下的行高、条目间隙与信息层级，使收藏列表与常规历史流具备高度一致的高密度阅读与极速操作质感。"
+        ],
+        "en-US": [
+          "Eliminated History Virtual List Blank Screen Deadlock: Resolved a critical issue where initial flex container height collapse or rapid view switching caused react-virtuoso to deadlock with zero items; enforced 100% height and initialItemCount seeding for instant, resilient first-frame card rendering.",
+          "Optimized Virtual Scroller Components & Viewport Preloading: Memoized core Virtuoso component bindings and hoisted viewport margins to prevent unnecessary object churn and scroll stutter during Store updates.",
+          "Aligned Compact Density Across Collections and History: Standardized item padding, row gap, and typographic hierarchy between collection and history lists, ensuring consistent information density and swift ergonomics."
+        ]
+      }
+    },
+    {
+      "version": "0.5.6",
+      "publishedAt": "2026-10-16",
+      "changelogUrl": "https://qollect.zongqir.com/changelog#v0-5-6",
+      "summary": {
+        "zh-CN": "收藏流极简纯净与预览交互增强：收藏夹全尺寸统合为紧凑列表形态并移除冗余卡片网格，卡片操作栏极致瘦身，彻底修复备注编辑导致的误退出与空白缺陷。",
+        "en-US": "Pure collection list stream & enhanced preview UX: Standardized collection board into a unified compact list across all modes, streamlined card action toolbar, and eliminated preview dismissal & blank gaps during note editing."
+      },
+      "highlights": {
+        "zh-CN": [
+          "收藏夹体验全面极简化：无论在 Mini 模式还是普通窗口模式下，收藏区彻底废除分散且冗余的卡片网格/瀑布流模式，固定采用单列紧凑列表，移除顶部多余的视图切换按钮，信息呈现与浏览体验更加专注高质。",
+          "历史流卡片操作极致瘦身：单击卡片已具备直达全量预览抽屉能力，移除了卡片右上角重复冗余的放大展开图标，视觉负担进一步减负。",
+          "预览抽屉编辑备注防退出与空白消除：彻底解决预览界面添加/编辑备注时遮罩穿透误判导致抽屉意外退出的交互缺陷；重构备注编辑容器布局，条目内容始终自适应居于常驻可视区，彻底杜绝空白遮挡。"
+        ],
+        "en-US": [
+          "Standardized Pure Collection List Stream: Completely phased out the redundant multi-column card grid/masonry mode across both Mini and normal views, standardizing on a clean single-column list and removing unnecessary view toggle buttons.",
+          "Streamlined Compact Card Actions: With single-click already opening full rich preview, eliminated the redundant expand/preview badge icon on card headers to minimize visual clutter.",
+          "Fixed Note Edit Dismissal & Blank Overlap in Preview: Prevented unexpected preview drawer dismissal caused by mask click-through during note editing; refactored the note editor layout to keep content fully visible without awkward blank viewports."
+        ]
+      }
+    },
+    {
+      "version": "0.5.5",
+      "publishedAt": "2026-10-16",
+      "changelogUrl": "https://qollect.zongqir.com/changelog#v0-5-5",
+      "summary": {
+        "zh-CN": "体验统合与视觉净化：Mini 模式点击卡片直达完整高保真预览，彻底消除右上角背景泛黄渐变，精简全局设置认知负担。",
+        "en-US": "Unified preview & visual cleanup: Mini mode cards now open full rich preview directly, removed warm yellow background gradient tint, and streamlined settings."
+      },
+      "highlights": {
+        "zh-CN": [
+          "Mini 模式预览体验大统合：彻底废除狭窄拥挤的行内折叠预览与「小眼睛」二次跳转，点击卡片直接切入全量高保真预览抽屉，长文本、代码高亮、OCR 与大图一目了然，点返回或按 ESC 即可退回。",
+          "背景视觉氛围彻底净化：拔除面板背景网格光在右上角硬编码的暖黄警告色径向渐变，彻底解决深色及浅色模式下右上角脏黄渐进色溢出的视觉痛点，质感恢复纯净通透。",
+          "设置页精简与默认体验优化：将「窗口自适应自动切换」与「图片文字识别 (OCR)」收敛为默认常开核心能力，全面移除旧版本残留的「暂存」废弃概念，界面更加清爽专注。"
+        ],
+        "en-US": [
+          "Unified Mini Mode Preview Experience: Replaced cramped inline accordion preview and redundant 'eye' icon button with direct full-pane rich preview, supporting deep text scrolling, syntax highlighting, OCR, and instant ESC/back navigation.",
+          "Purified Ambient Background Lighting: Completely removed the hardcoded warm yellow radial gradient from the top-right corner in ambient overlay tokens, eliminating the murky yellowish tint across dark and light themes.",
+          "Streamlined Settings & Core Defaults: Standardized adaptive window switching and OCR text recognition as always-on default capabilities, while thoroughly purging legacy staging concept leftovers."
+        ]
+      }
+    },
+    {
+      "version": "0.5.4",
+      "publishedAt": "2026-10-15",
+      "changelogUrl": "https://qollect.zongqir.com/changelog#v0-5-4",
+      "summary": {
+        "zh-CN": "交互与视觉优化：彻底消除未选中条目时的空占位大黑框，实现列表常驻全宽与按需抽屉预览的流畅闭环体验。",
+        "en-US": "UX & visual refinement: eliminated empty placeholder black box, restoring full-width stream layout with clean on-demand drawer preview."
+      },
+      "highlights": {
+        "zh-CN": [
+          "彻底消除空占位大黑框：未选中条目且无对比/时间轴任务时，右侧多态面板自动收起，历史流与收藏板自然撑满视口，视野通透无割裂。",
+          "纯净按需抽屉预览流转：选中条目即时从侧方滑出高保真预览抽屉；点击返回、ESC 或背景遮罩立即平滑收起，不再残留无效空白占位。",
+          "空状态样式规范化重构：彻底剥离内联 style 属性并迁移至 CSS 类规范，根除 CSP 安全策略拦截报错，修复返回列表操作的响应闭环。"
+        ],
+        "en-US": [
+          "Eliminated Empty Placeholder Box: Right polymorphic panel auto-collapses when no active item is selected, allowing history and collection boards to utilize 100% viewport width.",
+          "Seamless On-Demand Drawer Preview: Clicking an item smoothly slides out the rich preview drawer; dismissing via back, ESC, or mask neatly hides it with zero orphaned layout residue.",
+          "Refactored Empty State Styles: Migrated all inline styles to standardized CSS classes to eliminate CSP policy blocks and ensure consistent fallback presentation."
+        ]
+      }
+    },
+    {
+      "version": "0.5.3",
+      "publishedAt": "2026-10-14",
+      "changelogUrl": "https://qollect.zongqir.com/changelog#v0-5-3",
+      "summary": {
+        "zh-CN": "紧急修复：拔除初始化已废弃方法调用引起的未捕获异常，彻底恢复剪贴板变动与手动添加的前端事件监听响应。",
+        "en-US": "Urgent bugfix: removed dead method call in app init that caused unhandled TypeError, fully restoring clipboard change and manual add event listeners."
+      },
+      "highlights": {
+        "zh-CN": [
+          "根除前端事件监听挂载死锁：移除重构遗留的无效 loadWorkbenches 调用，消除初始化 TypeError 阻断异常，确保 clipboard-changed 与 quick-note-saved 监听百分之百挂载生效。",
+          "剪贴板变动实时展示恢复：剪贴板复制及手动创建内容后，界面无需手动刷新，即时响应并实时渲染至历史流最顶部。",
+          "暴露应用全局状态调试接口：window.__QOLLECT_STORE__ 挂载就绪，支持通过 DevTools 直接排查组件数据流与状态变动。"
+        ],
+        "en-US": [
+          "Fixed App Init Event Listener Deadlock: Eliminated orphaned loadWorkbenches invocation that halted useEffect execution, ensuring clipboard-changed and quick-note-saved event listeners mount reliably.",
+          "Restored Real-Time Stream Rendering: Copying to system clipboard or manually adding notes now instantly updates the UI at the top of the history stream without requiring manual reloads.",
+          "Exposed Global Store Debug Anchor: App store is now bound to window.__QOLLECT_STORE__ for transparent inspection via DevTools console."
+        ]
+      }
+    },
+    {
+      "version": "0.5.2",
+      "publishedAt": "2026-10-14",
+      "changelogUrl": "https://qollect.zongqir.com/changelog#v0-5-2",
+      "summary": {
+        "zh-CN": "内建开发者调试工具、历史流时间戳自愈与列表更新容灾机制，全面强化数据加载稳定性。",
+        "en-US": "Built-in developer DevTools, automatic timestamp healing for history stream, and resilient data loading fallback."
+      },
+      "highlights": {
+        "zh-CN": [
+          "内建开发者调试支持：正式版支持通过系统托盘菜单「开发者工具」及全局快捷键（F12 / Ctrl+Shift+I）一键呼出 DevTools 控制台，便于排查异常与数据状态。",
+          "历史流时间戳自动清洗归位：数据库启动时自动检测并修复历史数据中的毫秒级及未来异常时间戳，防止新记录被脏数据挤出首屏列表。",
+          "聚焦与可见性状态感知自愈：当窗口重新获得焦点或显示状态变更时，自动平滑触发剪贴板增量刷新，保障列表与底层数据实时同步。",
+          "数据加载容灾平滑降级：轻量查询接口遇到解析异常时，自动平滑 fallback 至全量接口并输出诊断日志，杜绝静默失败。"
+        ],
+        "en-US": [
+          "Built-in DevTools Debugger: Release builds now support opening DevTools via tray menu 'Developer Tools' or shortcuts (F12 / Ctrl+Shift+I) for immediate runtime diagnostics.",
+          "Automatic Timestamp Healing: Automatically normalizes legacy millisecond and abnormal future timestamps in SQLite on startup to prevent new entries from being displaced.",
+          "Focus & Visibility Sync Healing: Re-focusing or unhiding the application window now triggers an incremental data refresh to ensure UI stays in sync with local storage.",
+          "Resilient Data Loading Fallback: If lightweight query decoding encounters an issue, data loading seamlessly falls back to full item query with diagnostic logging."
+        ]
+      }
+    },
+    {
+      "version": "0.5.1",
+      "publishedAt": "2026-10-12",
+      "changelogUrl": "https://qollect.zongqir.com/changelog#v0-5-1",
+      "summary": {
+        "zh-CN": "深度减负与体验重构：精简视图模式、修复预览交互闭环，物理移除悬浮窗、局域网同步及许可证模块，轻装上阵。",
+        "en-US": "Deep simplification & UX refinement: streamlined view modes, resolved preview flow deadlocks, physically removed floating widget, LAN sync, and license modules."
+      },
+      "highlights": {
+        "zh-CN": [
+          "模式精简与紧凑常驻：统一为迷你模式与多功能模式双态流转，彻底移除宽松模式，默认并唯一保持紧凑视图。",
+          "预览交互深度闭环：修复详情返回与小窗切换死锁，预览恢复为按需抽屉浮层唤起，返回彻底关闭抽屉，不再进入空白占位。",
+          "彻底物理移除悬浮窗：完全拔除悬浮小球与桌面气泡窗口全部代码及入口，大幅减少后台常驻进程与渲染开销。",
+          "彻底物理移除局域网同步：清理局域网设备发现、配对握手与底层网络服务，精简网络模块依赖。",
+          "全面解除付费与限制逻辑：彻底移除许可证激活与付费门槛，Beta 版全功能保持纯净无扰、即开即用。"
+        ],
+        "en-US": [
+          "Streamlined Modes & Compact Default: Window modes unified into Mini Mode and Full Mode, eliminating cozy density and fixing compact view as the single crisp standard.",
+          "Closed-Loop Preview UX: Fixed return navigation and mini-mode transition deadlocks; preview is now an on-demand drawer overlay that dismisses cleanly.",
+          "Complete Removal of Floating Widgets: Fully excised the floating widget ball and desktop bubble window to trim background runtime footprint.",
+          "Complete Removal of LAN Device Sync: Cleaned out mDNS discovery, device pairing, and background sync services for leaner networking.",
+          "Decoupled License & Paywall Logic: Stripped license activation and paywall checks, delivering a pure, distraction-free Beta experience."
+        ]
+      }
+    },
+    {
+      "version": "0.5.0",
+      "publishedAt": "2026-10-09",
+      "changelogUrl": "https://qollect.zongqir.com/changelog#v0-5-0",
+      "summary": {
+        "zh-CN": "大版本重构：全面剥离画布与复杂工作台，架构净减负 1.2 万行，回归极速“全量历史流 + 精选收藏夹”双流模型与常驻高保真深度预览。",
+        "en-US": "Major v0.5.0 redesign: completely removed canvas and heavy workbench for 12k+ LOC reduction, returning to lightning-fast history stream + favorites collection with persistent rich preview."
+      },
+      "highlights": {
+        "zh-CN": [
+          "轻量架构全面回归：物理拔除 ReactFlow 画布、手柄连线及独立工作台系统，卸载重型依赖，应用冷启动与内存占用显著改善。",
+          "经典双流高效交互：主视口收敛为极简的“全量历史流（滚动淘汰）”与“精选收藏板（长期留存）”，一键切换无认知负担。",
+          "常驻高保真深度预览：右侧面板重构为专属 PreviewPanel，支持长文本快速滚动、代码语法高亮、大图缩略与 OCR 文本提取，未选中条目时呈现精致毛玻璃空态。",
+          "数据无损平滑迁移：内置 SQLite Schema V9 原子迁移，历史工作台中的钉选内容与便签 100% 自动安全平移至收藏夹，老用户资产零丢失。",
+          "便签与拖拽直达收藏：快捷便签录入与外部文件拖入默认标记为收藏保存，避免被历史清理规则误淘。"
+        ],
+        "en-US": [
+          "Lightweight Core Refactor: Completely eliminated ReactFlow canvas whiteboard, bezier flowlines, and heavy workbench, slashing 12k+ LOC and optimizing startup memory.",
+          "Dual-Stream Simplicity: Main view refined into high-frequency History Stream (auto-pruned) and Curated Favorites Board (permanent assets) with zero cognitive friction.",
+          "Dedicated Rich Preview Panel: Right pane transformed into permanent high-fidelity PreviewPanel with syntax highlighting, deep text scrolling, image lightbox, and OCR text tools.",
+          "Zero-Loss Database Migration: Automated SQLite Schema V9 migration safely promotes all legacy workbench and sticky note items into favorites without data loss.",
+          "Direct Asset Persistence: Quick Notes and external dropped files are automatically favorited by default, immune to history auto-cleanup."
+        ]
+      }
+    },
+    {
+      "version": "0.4.9",
+      "publishedAt": "2026-09-16",
+      "changelogUrl": "https://qollect.zongqir.com/changelog#v0-4-9",
+      "summary": {
+        "zh-CN": "编辑卡片体验全新升级，工作台便签与多画布数据分桶彻底修复，画布置顶居中全貌灵动反馈。",
+        "en-US": "Revamped card editing workflow with prominent text editor, robust workbench canvas board data isolation, and organic fit-view focal feedback."
+      },
+      "highlights": {
+        "zh-CN": [
+          "原文优先编辑弹窗：编辑弹窗全面重构，原文内容置顶为主编辑区并支持字符统计，备注与标签轻量收拢，小窗及极窄迷你模式自适应排版。",
+          "工作台多画布数据分桶修复：彻底解决便签在默认工作台与自定义画板之间的归属判定、关联丢失与去重问题，画布状态更可靠稳定。",
+          "便签正文直接持久化：便签内容支持独立更新通道，修改直接落库与即时同步，免去整卡重建开销。",
+          "居中全貌灵动视野反馈：画布居中全览增加触觉动效与卡片微弹聚焦反馈，重置视野一目了然。",
+          "图片预览支持：编辑卡片弹窗支持图片类型条目的原图缩略预览。"
+        ],
+        "en-US": [
+          "Content-First Card Editor: Redesigned modal prioritizes direct content editing with live character count, compact notes and tags, and full mini-window responsiveness.",
+          "Workbench Board Isolation: Resolved data scoping and bucket deduplication across default and custom canvas boards, ensuring notes stay in place.",
+          "Direct Note Persistence: Added dedicated fast-path persistence for note content edits without full card reloads.",
+          "Dynamic Fit-View Feedback: Center View now delivers tactile button bounce, node pulse feedback, and clear state acknowledgment.",
+          "Image Preview Support: Card editor now supports native thumbnail previews for image items."
+        ]
+      }
+    },
+    {
+      "version": "0.4.8",
+      "publishedAt": "2026-09-13",
+      "changelogUrl": "https://qollect.zongqir.com/changelog#v0-4-8",
+      "summary": {
+        "zh-CN": "工作台便签画布交互大升级：支持点击卡片即刻就地编辑、平滑贝塞尔流线、窄窗智能折叠与全内联画布管理。",
+        "en-US": "Major canvas UX upgrade: inline note editing, smooth Bezier flowlines, responsive toolbar folding, and inline canvas management."
+      },
+      "highlights": {
+        "zh-CN": [
+          "卡片即点即编：便签正文接入原生内联文本框，点击即可直接输入与编辑，支持防抖自动保存与失焦保存。",
+          "平滑贝塞尔曲线：连线升级为自然柔和的贝塞尔流线，告别机械直角折线。",
+          "智能拓扑整理与字号保护：自动排列感知连线流向与先后逻辑，自适应排布列数，并防止缩放过小影响阅读。",
+          "全内联画布管理：新建、重命名、删除画布以及清除连线均在界面就地交互完成，彻底告别系统原生弹窗。",
+          "窄窗与迷你模式自适应：底部浮动工具栏支持容器感知，次要操作智能收拢为图标胶囊，小窗下依然整齐不挤压。"
+        ],
+        "en-US": [
+          "Direct Inline Note Editing: Click into any note on the canvas to write and edit instantly with auto-save.",
+          "Smooth Bezier Curves: Card connections now flow through graceful, organic Bezier curves instead of sharp step lines.",
+          "Topology-Aware Arrange & Font Protection: Smart arrangement preserves connection flow order and balances column density.",
+          "100% Inline Canvas Management: Create, rename, delete canvases and clear edges inline without native browser prompts.",
+          "Responsive Toolbar Folding: Bottom controls adapt intelligently in narrow and mini window modes."
+        ]
+      }
+    },
+    {
+      "version": "0.4.7",
+      "publishedAt": "2026-09-13",
+      "changelogUrl": "https://qollect.zongqir.com/changelog#v0-4-7",
+      "summary": {
+        "zh-CN": "全新上线灵动便签无限画布（Workbench Canvas）与双向拖拽，支持自由排版、多画布管理及磁吸连线。",
+        "en-US": "Introduced infinite Sticky Notes Canvas with bidirectional drag-and-drop, multi-canvas management, and magnetic card connectors."
+      },
+      "highlights": {
+        "zh-CN": [
+          "全新灵动便签画布（Workbench Canvas）：支持无限空间漫游、自由拖拽布局与角标缩放，打造 Apple Freeform / Miro 式的灵感整理台。",
+          "多画布管理系统：底部悬浮工具栏支持一键切换、新建、重命名与删除画布，便签位置与连线关系实时自动持久化。",
+          "双向无缝拖拽：支持从右侧历史流直接拖拽卡片落入画布指定位置，也可从画布拖出手柄快速移出至历史流。",
+          "卡片磁吸连线与视觉重构：支持四向磁吸连接线构建知识关系，精简卡片头部视觉，去除突兀底色与抢眼圆点。"
+        ],
+        "en-US": [
+          "New Sticky Notes Canvas (Workbench Canvas): Infinite canvas workspace with freeform dragging, tactile resizing, and grid auto-arrange.",
+          "Multi-Canvas Board Manager: Seamlessly switch, create, rename, and delete canvas boards with real-time auto-saving for layouts and edges.",
+          "Bidirectional Drag & Drop: Drag any item from History Stream directly onto the Canvas at drop coordinates, or drag off to unpin.",
+          "Magnetic Card Connectors: Connect cards across 4 directions with clean static flow lines, accompanied by a refined, distraction-free header design."
+        ]
+      }
+    },
+    {
+      "version": "0.4.6",
+      "publishedAt": "2026-08-29",
+      "changelogUrl": "https://qollect.zongqir.com/changelog#v0-4-6",
+      "summary": {
+        "zh-CN": "新增划选快捷动作气泡（时间戳/链接/算式/色值/外文），精简 CI 发版流程并提速 3 倍。",
+        "en-US": "Added contextual quick action bubble for selections, streamlined CI release workflow for 3x faster builds."
+      },
+      "highlights": {
+        "zh-CN": [
+          "新增「划选快捷动作气泡」可选特性，划选时间戳、链接、数学算式、色值或外文词句时在光标旁展示极简毛玻璃微气泡。",
+          "零打扰智能模式：普通中文与常规文本完全静默无弹窗，一键操作后平滑淡出，支持 ESC 立即销毁与边缘防溢出。",
+          "精简 GitHub Actions 发版流水线，优化 Windows 专属打包构建，发布流程提速 3 倍以上。"
+        ],
+        "en-US": [
+          "Added optional 'Quick Action Bubble' on text selection, showing contextual frosted glass action pills for timestamps, URLs, math, colors, and translation.",
+          "Zero-interruption design: stays completely silent for ordinary text, provides one-click actions, and dismisses smoothly on escape or outside clicks.",
+          "Streamlined CI release workflow focused on Windows release packaging, speeding up build times by over 3x."
+        ]
+      }
+    },
+    {
+      "version": "0.4.5",
+      "publishedAt": "2026-08-29",
+      "changelogUrl": "https://qollect.zongqir.com/changelog#v0-4-5",
+      "summary": {
+        "zh-CN": "新增 Windows 平台可选的鼠标划选及双击选词自动复制功能。",
+        "en-US": "Added optional copy-on-select and double-click word selection copy for Windows."
+      },
+      "highlights": {
+        "zh-CN": [
+          "在 Windows 上支持开启「鼠标划选自动复制」，选中文本并松开鼠标后自动复制到剪贴板。",
+          "支持可选的「双击选词自动复制」子项，双击选中单词时自动触发复制。",
+          "内置防误触保护，自动排除 Qollect 自身窗口与修饰键组合操作，并复用全局 Hash 去重管道。"
+        ],
+        "en-US": [
+          "Added optional 'Copy on text selection' on Windows to auto-copy highlighted text upon mouse release.",
+          "Added optional 'Copy on double-click selection' sub-toggle for quick word copying.",
+          "Built-in accidental trigger prevention: ignores Qollect's own window, modifier keys, and leverages global Hash deduplication."
+        ]
+      }
+    },
+    {
+      "version": "0.4.4",
+      "publishedAt": "2026-08-25",
+      "changelogUrl": "https://qollect.zongqir.com/changelog#v0-4-4",
+      "summary": {
+        "zh-CN": "更新分发与自动更新源切换至 dl.zongqir.com，优化全球下载稳定性。",
+        "en-US": "Migrate updater and distribution endpoints to dl.zongqir.com for improved download reliability."
+      },
+      "highlights": {
+        "zh-CN": [
+          "分发与自动更新源统一接入 dl.zongqir.com，保障客户端更新直连与下载体验。",
+          "优化 Cloudflare 边缘静态分发与 WAF 质询放行策略，提升跨地区访问稳定性。"
+        ],
+        "en-US": [
+          "Migrated distribution and updater endpoints to dl.zongqir.com for reliable client updates.",
+          "Optimized Cloudflare edge distribution and WAF challenge bypass rules for improved global availability."
+        ]
+      }
+    },
+    {
+      "version": "0.4.3",
+      "publishedAt": "2026-08-23",
+      "changelogUrl": "https://qollect.zongqir.com/changelog#v0-4-3",
+      "summary": {
+        "zh-CN": "新增可选输入补录，并完善自托管分析收集的同步状态、失败提示和输入法文本去重。",
+        "en-US": "Added optional input capture and improved self-hosted collector sync status, failure feedback, and IME text deduplication."
+      },
+      "highlights": {
+        "zh-CN": [
+          "在 Windows 上可选补录未进入剪贴板的已稳定输入内容，并提供一次性输入框支持检测；密码框和 Qollect 自身会自动跳过。",
+          "输入法逐步更新的文本会在同一条历史记录中就地更新，避免 A、A+B、A+B+C 形成多条重复记录。",
+          "自托管分析收集现显示最近同步时间；立即同步会汇总失败原因，便于定位服务器或网络问题。"
+        ],
+        "en-US": [
+          "On Windows, optionally capture settled text that never reaches the clipboard, with a one-time input-field support check; password fields and Qollect itself are skipped automatically.",
+          "Incremental IME text updates now revise one history item in place, preventing A, A+B, and A+B+C from becoming duplicate records.",
+          "The self-hosted collector now shows the latest sync time, and Sync now summarizes failure reasons to make server and network issues easier to diagnose."
+        ]
+      }
+    },
+    {
+      "version": "0.4.2",
+      "publishedAt": "2026-08-22",
+      "changelogUrl": "https://qollect.zongqir.com/changelog#v0-4-2",
+      "summary": {
+        "zh-CN": "移除截图复制入口，并让自托管分析收集按批次携带本地 AI 标签。",
+        "en-US": "Removed screenshot copy and added batched self-hosted analysis uploads with local AI tags."
+      },
+      "highlights": {
+        "zh-CN": [
+          "移除截图识别复制入口与专用后台调用，保留图片条目 OCR。",
+          "自托管分析收集改为每 5 分钟批量上传，避免抢占本地 AI 标签生成。",
+          "上传事件可包含本地 AI 标签；用户手动标签不会上传。"
+        ],
+        "en-US": [
+          "Removed screenshot-to-copy entry points and dedicated backend calls while preserving image OCR.",
+          "Self-hosted analysis uploads now run in five-minute batches so local AI tagging can complete first.",
+          "Upload events can include local AI tags; manually added tags are not sent."
+        ]
+      }
+    },
+    {
+      "version": "0.4.1",
+      "publishedAt": "2026-08-22",
+      "changelogUrl": "https://qollect.zongqir.com/changelog#v0-4-1",
+      "summary": {
+        "zh-CN": "为自托管分析收集补充可观测上传状态与手动同步。",
+        "en-US": "Added observable upload status and manual sync for the self-hosted analysis collector."
+      },
+      "highlights": {
+        "zh-CN": [
+          "设置页显示今日成功上传数和最近 24 小时待上传数，不展示剪贴板正文。",
+          "新增立即同步操作，返回本次成功、失败和剩余待上传数量。",
+          "修正关闭或未完整配置收集服务时，新的剪贴板条目被误记为已上传的问题。"
+        ],
+        "en-US": [
+          "Settings now show today's successful uploads and pending uploads from the last 24 hours without exposing clipboard content.",
+          "Added a Sync now action with uploaded, failed, and remaining counts for the current run.",
+          "Fixed new clipboard items being marked as uploaded when the collector is disabled or incomplete."
+        ]
+      }
+    },
+    {
+      "version": "0.4.0",
+      "publishedAt": "2026-08-22",
+      "changelogUrl": "https://qollect.zongqir.com/changelog#v0-4-0",
+      "summary": {
+        "zh-CN": "新增自托管剪贴板文本分析收集能力，支持后台上传、隐私提示和轻量 Collector 服务部署。",
+        "en-US": "Added self-hosted clipboard text collection for background analysis with privacy notices and a lightweight Collector deployment."
+      },
+      "highlights": {
+        "zh-CN": [
+          "新增自托管分析收集设置，可配置服务器地址和访问密码。",
+          "仅上传文本和链接，图片、文件和二进制内容不会上传。",
+          "后台只处理最近 24 小时记录，失败不会形成长期积压。",
+          "提供连接测试、按天归档的 Go Collector 和 Docker Compose 部署方式。",
+          "支持 GHCR 镜像发布，并提供已有 Caddy/独立 Caddy 两种部署模式。"
+        ],
+        "en-US": [
+          "Added self-hosted collector settings with a configurable endpoint and access token.",
+          "Only text and link records are uploaded; images, files, and binary content are skipped.",
+          "Background retries are limited to the latest 24 hours without a long-lived failed queue.",
+          "Added a lightweight Go Collector with daily JSONL archives and Docker Compose deployment.",
+          "Added GHCR image publishing with existing-proxy and standalone-Caddy deployment modes."
+        ]
+      }
+    },
+    {
+      "version": "0.3.12",
+      "publishedAt": "2026-06-27",
+      "changelogUrl": "https://qollect.zongqir.com/changelog#v0-3-12",
+      "summary": {
+        "zh-CN": "修复语音输入等“临时复制再恢复原剪贴板”场景下的排序异常，让真正的新内容稳定留在历史顶部。",
+        "en-US": "Fixed recency ordering for clipboard rollback flows such as voice input tools that temporarily copy new text and then restore the previous clipboard content."
+      },
+      "highlights": {
+        "zh-CN": [
+          "新增短时 A -> B -> A 剪贴板回滚识别，避免输入法恢复旧内容时把旧条目错误顶回第一。",
+          "语音输入、输入法上屏等“借用剪贴板再恢复”的流程里，真正的新文本会更稳定地保留在历史流顶部。",
+          "保留正常重复复制的既有行为，手动重新复制旧内容时仍然会按最近活动更新时间回到前面。",
+          "补充后端单元测试，覆盖短时回滚抑制、正常双击复制保持有效、超时回退不误判等场景。"
+        ],
+        "en-US": [
+          "Added short-window A -> B -> A clipboard rollback detection so restored older content no longer jumps back to the top by mistake.",
+          "In voice input and IME flows that temporarily borrow the clipboard, the real newly produced text now stays at the top more reliably.",
+          "Preserved the existing behavior for normal repeated copies, so intentionally copying an older item again still refreshes its recency.",
+          "Added backend unit tests covering rollback suppression, preserved double-copy behavior, and late-return cases that should not be suppressed."
+        ]
+      }
+    },
+    {
+      "version": "0.3.11",
+      "publishedAt": "2026-05-27",
+      "changelogUrl": "https://qollect.zongqir.com/changelog#v0-3-11",
+      "summary": {
+        "zh-CN": "优化隐藏后重开体验，默认保留主窗口壳，并让低内存模式先释放重内容再按需重建窗口。",
+        "en-US": "Improved reopen behavior after hiding the app by keeping the main window shell by default and making low memory mode release heavy content before rebuilding the window only when needed."
+      },
+      "highlights": {
+        "zh-CN": [
+          "普通模式下关闭到托盘后不再 30 秒销毁主 WebView，减少再次打开时看到启动转圈的概率。",
+          "低内存模式改为分阶段释放：先清理历史流、收藏区、工作区和预览缓存，长时间后台后才释放窗口壳。",
+          "将低内存模式的窗口壳释放延迟从 12 秒调整为 120 秒，短时间重开优先保持快速恢复。",
+          "收藏区和工作区现在会响应内存挂起与恢复，避免只释放历史流导致状态和内存策略不一致。",
+          "更新中英文设置说明，让用户更清楚低内存模式会在内存占用与唤起速度之间做取舍。"
+        ],
+        "en-US": [
+          "In normal mode, hiding to tray no longer destroys the main WebView after 30 seconds, reducing the chance of seeing the startup spinner on reopen.",
+          "Low memory mode now releases memory in stages: history, collection, workbench, and preview caches are cleared before the window shell is released after longer background time.",
+          "The low-memory window-shell release delay increased from 12 seconds to 120 seconds so short reopens prioritize fast restore.",
+          "Collection and Workbench now respond to memory suspend and resume signals, keeping their state cleanup aligned with History.",
+          "Updated bilingual settings copy so users can better understand the tradeoff between lower idle memory and wake-up speed."
+        ]
+      }
+    },
+    {
+      "version": "0.3.10",
+      "publishedAt": "2026-04-25",
+      "changelogUrl": "https://qollect.zongqir.com/changelog#v0-3-10",
+      "summary": {
+        "zh-CN": "优化文本去重判定，减少同一句内容因空格、换行或零宽字符差异被拆成多条的问题。",
+        "en-US": "Improved text deduplication so the same sentence is less likely to split into multiple history items because of whitespace, line-ending, or zero-width character differences."
+      },
+      "highlights": {
+        "zh-CN": [
+          "文本判重改为先做安全规范化，再参与 content_hash 计算，统一处理首尾空白、换行风格、行尾空白和常见零宽字符。",
+          "保留正文内部空格差异，避免代码、命令、表格等内容被过度合并。",
+          "统一剪贴板监听、手动新增文本和当前内容定位的 hash 口径，未来新入库数据的判重结果更一致、更稳定。"
+        ],
+        "en-US": [
+          "Text deduplication now uses a safer normalization step before computing content_hash, covering outer whitespace, line endings, trailing line whitespace, and common zero-width characters.",
+          "Internal spacing differences are still preserved so code, commands, and tabular content are not merged too aggressively.",
+          "Clipboard monitoring, manual text insertion, and current-content lookup now share the same hash rule, making future deduplication more consistent and predictable."
+        ]
+      }
+    },
+    {
+      "version": "0.3.9",
+      "publishedAt": "2026-04-24",
+      "changelogUrl": "https://qollect.zongqir.com/changelog#v0-3-9",
+      "summary": {
+        "zh-CN": "修正 mini 模式默认落点，并让重新复制旧内容时刷新最近活动时间，列表排序终于更符合真实使用习惯。",
+        "en-US": "Adjusted the default mini-mode landing view and refreshed recent activity timestamps when older items are copied again so sorting better matches real usage."
+      },
+      "highlights": {
+        "zh-CN": [
+          "修复 mini 模式默认落到工作区的问题，常规场景下进入 mini 会优先回到历史流，只有预览、对比、时间线或工作区独占视图才保留面板语义。",
+          "当用户从历史流、收藏区或工作区重新复制一条已有内容时，会同步刷新该条记录的 updated_at，后续按最近活动排序时会更贴近真实使用轨迹。",
+          "前端在复制成功后会立即更新本地列表顺序，不需要等待下一次全量刷新，重新使用过的内容会更快回到前面。"
+        ],
+        "en-US": [
+          "Fixed the default mini-mode landing target so regular mini entry returns to the history stream, while preview, compare, timeline, and panel-only workbench views still keep their panel-first behavior.",
+          "When an existing item is copied again from history, collection, or workbench, its updated_at timestamp is refreshed so recency-based sorting better reflects actual reuse.",
+          "The frontend now reorders the local list immediately after a successful copy, so reused items move forward without waiting for a full reload."
+        ]
+      }
+    },
+    {
+      "version": "0.3.8",
+      "publishedAt": "2026-04-20",
+      "changelogUrl": "https://qollect.zongqir.com/changelog#v0-3-8",
+      "summary": {
+        "zh-CN": "轮换更新签名密钥并同步官网回退下载版本，确保后续自动更新与官网分发重新回到同一条稳定链路。",
+        "en-US": "Rotated the updater signing keys and aligned the website fallback download version so automatic updates and site distribution are back on the same reliable path."
+      },
+      "highlights": {
+        "zh-CN": [
+          "重新生成并切换 Tauri updater 签名密钥，修复发布流程中私钥签名与仓库公钥验签不一致的问题。",
+          "同步更新 GitHub Release workflow 使用的签名 secrets，后续构建产物会使用新的签名链路生成更新元数据。",
+          "将应用版本提升到 0.3.8，并补齐本次中英文更新说明，保持客户端弹窗、latest.json、GitHub Release 与官网 changelog 继续共用同一数据源。",
+          "同步推进官网下载区的 fallback 版本，避免 latest.json 临时不可用时页面仍回落到过旧安装包。"
+        ],
+        "en-US": [
+          "Regenerated and switched the Tauri updater signing keys to fix the mismatch between the signing secret and the repository public key during release verification.",
+          "Updated the signing secrets used by the GitHub Release workflow so future builds generate updater metadata through the new signing chain.",
+          "Bumped the app to 0.3.8 and added bilingual release notes so the in-app prompt, latest.json, GitHub Release, and website changelog continue sharing one source of truth.",
+          "Moved the website download fallback forward as well, so the page no longer drops back to an outdated installer when latest.json is temporarily unavailable."
+        ]
+      }
+    },
+    {
+      "version": "0.3.7",
+      "publishedAt": "2026-04-19",
+      "changelogUrl": "https://qollect.zongqir.com/changelog#v0-3-7",
+      "summary": {
+        "zh-CN": "默认开启开机自启，并继续打磨历史流与工作区的窄窗界面，让整体布局更紧凑也更顺眼。",
+        "en-US": "Enabled autostart by default and continued refining narrow-window history and workbench layouts so the interface feels tighter and more visually consistent."
+      },
+      "highlights": {
+        "zh-CN": [
+          "默认开启开机自启，并在首次启动时持久化设置，新安装后无需额外配置即可随系统启动。",
+          "收紧标题栏、顶部筛选区与快速记录相关样式，统一紧凑和宽松密度下的顶部节奏。",
+          "历史流顶部搜索筛选区与下方卡片重新对齐，mini 与正常模式同步弱化卡片边框、阴影和卡片间分隔线。",
+          "工作区在窄窗和单列场景下进一步压缩卡片内边距、字号和列宽约束，减少右侧内容被截断的问题。"
+        ],
+        "en-US": [
+          "Enabled autostart by default and persisted the setting on first launch, so fresh installs can start with the system without extra setup.",
+          "Tightened the title bar, top filter rail, and quick-note styling to keep a more consistent top rhythm across compact and cozy densities.",
+          "Realigned the history search rail with the cards below it, and softened card borders, shadows, and separators in both normal and mini modes.",
+          "Further compacted workbench cards in narrow and single-column layouts by reducing padding, type scale, and column constraints so the right side is less likely to feel clipped."
+        ]
+      }
+    },
+    {
+      "version": "0.3.6",
+      "publishedAt": "2026-03-26",
+      "changelogUrl": "https://qollect.zongqir.com/changelog#v0-3-6",
+      "summary": {
+        "zh-CN": "继续收紧顶部标题栏占位，并优化工作区空态在窄窗下的展示，让界面更紧凑也更易读。",
+        "en-US": "Further tightened the title-bar footprint and improved narrow workbench empty-state presentation so the interface stays compact without losing readability."
+      },
+      "highlights": {
+        "zh-CN": [
+          "继续压缩标题栏高度、按钮尺寸和左右留白，降低顶部菜单区域的整体视觉占用。",
+          "工作区空态移除普通状态下的内圈虚线框，缓解窄窗与 mini 模式下的文字拥挤和截断感。",
+          "保留工作区错误态的边框语义，确保加载失败或筛选异常时仍有明确状态反馈。",
+          "同步收敛 compact 密度下的标题栏比例，让 mini 与正常模式的顶部节奏更一致。"
+        ],
+        "en-US": [
+          "Further reduced title-bar height, button sizes, and horizontal padding to make the entire top menu area feel lighter.",
+          "Removed the inner dashed frame from the normal workbench empty state so narrow and mini layouts no longer squeeze the guidance text as aggressively.",
+          "Kept the bordered treatment for workbench error states so load or filtering failures still remain visually explicit.",
+          "Aligned compact-density title-bar proportions with the updated layout so normal and mini modes keep a more consistent top rhythm."
+        ]
+      }
+    },
+    {
+      "version": "0.3.5",
+      "publishedAt": "2026-03-21",
+      "changelogUrl": "https://qollect.zongqir.com/changelog#v0-3-5",
+      "summary": {
+        "zh-CN": "继续打磨标题栏与顶部操作区细节，统一默认态视觉层级并修复透明度调节时的布局挤压问题。",
+        "en-US": "Continued refining the title bar and top controls by unifying default visual hierarchy and fixing layout shifts during transparency adjustment."
+      },
+      "highlights": {
+        "zh-CN": [
+          "修复标题栏透明度调节指示器在不同百分比下挤压布局、下沉到下一层的问题。",
+          "收紧标题栏工具条体积，降低顶部控件的视觉占用，让界面更克制。",
+          "统一标题栏按钮默认态的深浅层级，仅在 hover / 激活态保留语义差异。",
+          "移除左上角品牌图标与名称，标题栏改为更纯粹的工具条布局。",
+          "继续优化卡片与快速记录区域的文本可选规则，减少非正文内容被误选中。"
+        ],
+        "en-US": [
+          "Fixed the title-bar transparency indicator so different percentage values no longer push layout or spill into the next row.",
+          "Tightened the visual size of the title-bar tool groups to make the top controls feel lighter and more restrained.",
+          "Unified the default icon tone across title-bar buttons while keeping semantic differences for hover and active states.",
+          "Removed the top-left brand logo and title to simplify the title bar into a cleaner tool-focused layout.",
+          "Further refined text-selection behavior in cards and the quick-note area to reduce accidental selection outside main content."
+        ]
+      }
+    },
+    {
+      "version": "0.3.4",
+      "publishedAt": "2026-03-15",
+      "changelogUrl": "https://qollect.zongqir.com/changelog#v0-3-4",
+      "summary": {
+        "zh-CN": "继续优化历史流与工作区性能，降低收起后重开的等待感，并修复相关布局回归。",
+        "en-US": "Continued improving history/workbench performance, reduced reopen latency after collapsing, and fixed the related layout regression."
+      },
+      "highlights": {
+        "zh-CN": [
+          "历史流、工作区与收藏区继续减少整表扫描，改为更多索引读取与按需计算。",
+          "优化工作区 pinned 数据链路，降低筛选、排序和批量操作时的重渲染成本。",
+          "优化窗口隐藏后的恢复路径，减少快速收起再打开时的等待感。",
+          "修复桌面布局切换过程中的界面回归，恢复列表与右侧面板的正常显示。",
+          "继续拆分低频弹层资源，降低主包压力与非必要加载。"
+        ],
+        "en-US": [
+          "Further reduced full-list scans across history, workbench, and collection by using indexed reads and more on-demand computation.",
+          "Optimized the pinned-item data path in Workbench to cut rerender cost during filtering, sorting, and batch actions.",
+          "Improved the restore path after hiding the window to reduce perceived delay during quick reopen flows.",
+          "Fixed the desktop layout regression introduced during panel-toggle optimization and restored normal list/panel rendering.",
+          "Continued splitting low-frequency overlays out of the main bundle to reduce unnecessary startup cost."
+        ]
+      }
+    },
+    {
+      "version": "0.3.3",
+      "publishedAt": "2026-03-15",
+      "changelogUrl": "https://qollect.zongqir.com/changelog#v0-3-3",
+      "summary": {
+        "zh-CN": "聚焦预览编辑回写与多工作区切换体验，继续统一列表交互显隐规则并收敛样式 token。",
+        "en-US": "Focused on preview edit persistence and multi-workbench switching while further unifying list hover behavior and tightening style token usage."
+      },
+      "highlights": {
+        "zh-CN": [
+          "修复预览区正文编辑后保存但内容未即时刷新的问题，编辑结果会立即回写到当前预览与列表状态。",
+          "继续优化多工作区与面板切换体验，补齐默认工作台、切换入口和工作区标注等交互细节。",
+          "统一列表卡片的信息显隐规则，来源信息与工具操作按悬浮展示，固定或收藏状态不再长期占用注意力。",
+          "修复历史流单行内容下双击复制与自动粘贴的边界问题，减少窄窗和特殊内容场景下的误判。",
+          "清理快速记录与收藏区相关样式 token，恢复严格样式守卫为零告警状态。"
+        ],
+        "en-US": [
+          "Fixed the case where saving edited preview text did not refresh immediately, and now write back changes to both the active preview and list state right away.",
+          "Continued refining multi-workbench and panel switching with clearer default workspace behavior, switch entry points, and workbench labeling details.",
+          "Unified list-card visibility rules so source labels and tool actions appear on hover instead of staying persistent after pinning or favoriting.",
+          "Resolved edge cases around double-click copy and auto-paste for single-line history items, especially in narrow layouts and special-content scenarios.",
+          "Cleaned up style tokens for quick note and collection UI so strict style-guard checks return to zero warnings."
+        ]
+      }
+    },
+    {
+      "version": "0.3.2",
+      "publishedAt": "2026-03-12",
+      "changelogUrl": "https://qollect.zongqir.com/changelog#v0-3-2",
+      "summary": {
+        "zh-CN": "进一步收敛历史流与收藏区信息密度，补齐模式切换反馈并优化工作区排序入口体验。",
+        "en-US": "Further tightened history/collection information density, added clearer mode-switch feedback, and refined workbench sort entry behavior."
+      },
+      "highlights": {
+        "zh-CN": [
+          "切换紧凑/宽松密度时新增全局 toast 提示，当前模式状态更明确。",
+          "工作区长按进入排序时会自动展开筛选区，并给出“上方完成、下方拖拽”的操作提示。",
+          "移除历史流日期导航与分组头（如“今天 88”），减少重复信息占位。",
+          "收藏区移除仅展示总数的独立行，只有存在筛选/状态信息时才展示元信息行。"
+        ],
+        "en-US": [
+          "Added global toasts when switching Compact/Cozy density so the active mode is always explicit.",
+          "Long-press sorting in Workbench now auto-expands filters and shows a clearer \"finish above, drag below\" hint.",
+          "Removed history date navigation and group headers (for example \"Today 88\") to reduce redundant vertical usage.",
+          "Removed the collection-only count row and now render the meta row only when there is actual filter/status information."
+        ]
+      }
+    },
+    {
+      "version": "0.3.1",
+      "publishedAt": "2026-03-11",
+      "changelogUrl": "https://qollect.zongqir.com/changelog#v0-3-1",
+      "summary": {
+        "zh-CN": "聚焦工作区效率与稳定性，修复关键竞态问题并优化筛选与操作反馈交互。",
+        "en-US": "Focused on workbench efficiency and stability with critical race-condition fixes and smoother filtering/action feedback."
+      },
+      "highlights": {
+        "zh-CN": [
+          "修复快速记录窗口在高频开关下的竞态锁死问题，避免无法再次打开或关闭。",
+          "工作区置顶排序调整为“最新置顶优先”，新增项默认出现在前面，符合近期优先的使用习惯。",
+          "工作区筛选入口并入快速笔记输入区，并支持折叠状态记忆，减少顶部空间占用。",
+          "工作区“操作”升级为可配置主操作，一键执行常用动作，减少二次点击路径。",
+          "操作反馈改为悬浮 toast，不再挤压底部按钮区域，交互过程更稳定。"
+        ],
+        "en-US": [
+          "Fixed a rapid open/close race in Quick Input that could lock the window state and block reopen/close actions.",
+          "Updated workbench pin ordering to recency-first so newly pinned items appear at the top by default.",
+          "Merged workbench filter entry into the quick-note input area and persisted collapsed state to save vertical space.",
+          "Upgraded workbench \"Actions\" to a configurable primary action with one-click execution for common tasks.",
+          "Switched operation feedback to floating toasts to prevent bottom action-bar layout jumps."
+        ]
+      }
+    },
+    {
+      "version": "0.3.0",
+      "publishedAt": "2026-03-09",
+      "changelogUrl": "https://qollect.zongqir.com/changelog#v0-3-0",
+      "summary": {
+        "zh-CN": "围绕筛选链路、工作区交互与预览体验完成一轮系统升级，稳定性与可控性显著提升。",
+        "en-US": "Delivered a system-wide upgrade across filtering, workbench interactions, and preview ergonomics with stronger reliability and control."
+      },
+      "highlights": {
+        "zh-CN": [
+          "统一历史流、收藏区、工作区的筛选策略，默认优先走后端查询，结果一致性更高。",
+          "新增并完善内部来源复制控制：可关闭 Qollect 来源回流，后端采集链路增加来源拦截兜底。",
+          "删除与移出等高风险操作补齐首击提示与二次确认，显著降低误触删除概率。",
+          "窄窗口与 mini 模式下优化工作区筛选栏、标题栏按钮对齐与触控尺寸，拥挤和错位问题得到修复。",
+          "图片预览体验增强：新增“仅看图片”入口、缩放提示与灯箱滚轮缩放/拖拽，查看大图更顺手。"
+        ],
+        "en-US": [
+          "Unified filtering behavior across history, collection, and workbench with backend-first querying for stronger result consistency.",
+          "Added and hardened internal-source copy controls, including backend ingestion guards when Qollect-origin capture is disabled.",
+          "Improved destructive-action safety with first-click toasts and second-click confirmation for delete/remove flows.",
+          "Refined narrow-window and mini-mode usability by fixing crowded workbench filters, titlebar alignment, and tap-target sizing.",
+          "Enhanced image preview with an \"Image only\" entry, clearer zoom guidance, and lightbox wheel-zoom plus drag panning."
+        ]
+      }
+    },
+    {
+      "version": "0.2.7",
+      "publishedAt": "2026-03-05",
+      "changelogUrl": "https://qollect.zongqir.com/changelog#v0-2-7",
+      "summary": {
+        "zh-CN": "聚焦收藏区体验，补齐视图切换与交互细节，收藏管理更清晰顺手。",
+        "en-US": "Focused on favorites/workbench experience with view switching and interaction refinements for clearer, smoother collection management."
+      },
+      "highlights": {
+        "zh-CN": [
+          "收藏区新增视图切换能力，支持按不同浏览偏好切换展示方式。",
+          "继续优化收藏栏结构与操作路径，常用动作更集中、反馈更直接。",
+          "完善收藏项的交互处理细节，减少状态切换时的困惑与误触。",
+          "同步优化相关历史流文件展示细节，收藏与历史协同更顺滑。"
+        ],
+        "en-US": [
+          "Added view switching in the favorites/workbench area for different browsing preferences.",
+          "Further refined favorites panel structure and action flow for clearer, faster operations.",
+          "Improved favorite-item interaction handling to reduce confusion and mis-taps during state changes.",
+          "Polished related history-file presentation details for smoother flow between history and favorites."
+        ]
+      }
+    },
+    {
+      "version": "0.2.6",
+      "publishedAt": "2026-03-03",
+      "changelogUrl": "https://qollect.zongqir.com/changelog#v0-2-6",
+      "summary": {
+        "zh-CN": "新增可选的截图识别入口，并补齐拖动成文件、多选与小屏编辑增强，整体更稳更顺手。",
+        "en-US": "Added an optional Smart Copy entry plus drag-to-file, multi-select, and small-screen editing enhancements for a cleaner, more reliable workflow."
+      },
+      "highlights": {
+        "zh-CN": [
+          "设置中新增“显示截图识别按钮”开关，默认关闭，主界面更简洁。",
+          "开启后会在设置页给出触发位置提示，明确可从标题栏左侧入口启动。",
+          "截图识别入口图标升级为更直观的扫描样式，降低识别路径理解成本。",
+          "智能复制在 Windows 下改为系统 Native OCR 优先，云端/当前配置作为失败兜底。",
+          "即使云端 OCR 短暂异常，也能优先依赖本地 OCR 保证可用性。",
+          "新增“拖动文字生成文件”能力，可将文本内容直接拖出为文件用于跨应用交付。",
+          "多选流程持续优化，批量操作路径更清晰，组合处理更高效。",
+          "小屏幕下编辑区按钮可用性增强，避免窄窗场景按钮拥挤或难以点击。"
+        ],
+        "en-US": [
+          "Added a \"Show Smart Copy Button\" setting and turned it off by default to keep the main UI cleaner.",
+          "When enabled, Settings now shows a clear hint for where to trigger Smart Copy from the title bar.",
+          "Updated the Smart Copy entry icon to a more intuitive scan-style visual.",
+          "On Windows, Smart Copy now prioritizes native OCR first, with configured/cloud OCR as fallback.",
+          "If cloud OCR is temporarily unavailable, local OCR still keeps Smart Copy usable.",
+          "Added drag-to-file for text so clipboard content can be dragged out directly as a file across apps.",
+          "Further refined multi-select flows with clearer batch actions and more efficient combined operations.",
+          "Improved edit-action buttons on small screens to avoid cramped layouts and preserve tap targets."
+        ]
+      }
+    },
+    {
+      "version": "0.2.5",
+      "publishedAt": "2026-03-03",
+      "changelogUrl": "https://qollect.zongqir.com/changelog#v0-2-5",
+      "summary": {
+        "zh-CN": "新增历史右键菜单与升级提示板，并优化工作区检索链路与编辑体验。",
+        "en-US": "Added a richer history context menu and in-app release notes, with better workspace search/favorites coverage and editing flow."
+      },
+      "highlights": {
+        "zh-CN": [
+          "新增历史卡片右键菜单，支持复制/纯文本复制、置顶、编辑备注标签、删除等快捷操作。",
+          "多选场景加入右键批量动作（合并复制、批量删除二次确认），批处理效率更高。",
+          "新增版本更新提示板：升级后自动展示本次更新，并可一键跳转完整更新日志。",
+          "优化编辑弹窗交互与视觉细节，快速新增、保存反馈与操作路径更顺滑。",
+          "优化工作区数据检索：搜索与收藏筛选走后端过滤，低内存窗口下结果更完整、更稳定。"
+        ],
+        "en-US": [
+          "Added a context menu for history cards with quick actions for copy/copy as plain text, pin, note/tag editing, and delete.",
+          "Extended right-click support to multi-select actions, including merged copy and guarded batch delete confirmation.",
+          "Introduced an in-app What's New panel that appears after upgrades and links directly to the full changelog.",
+          "Refined edit modal interactions and visual details to make quick add, save feedback, and editing flows smoother.",
+          "Improved workspace retrieval: search and favorites now use backend filtering for more complete and stable results under low-memory windows."
+        ]
+      }
+    },
+    {
+      "version": "0.2.4",
+      "publishedAt": "2026-03-02",
+      "changelogUrl": "https://qollect.zongqir.com/changelog#v0-2-4",
+      "summary": {
+        "zh-CN": "优化右键菜单与窗口交互，日常操作更顺手。",
+        "en-US": "Refined context-menu and window interactions for smoother daily workflows."
+      },
+      "highlights": {
+        "zh-CN": [
+          "新增并优化右键菜单设计，常用操作更直观",
+          "增加窗口置顶能力，便于跨应用快速粘贴",
+          "改进快速预览与面板交互，提升整体易用性"
+        ],
+        "en-US": [
+          "Redesigned and refined the context menu for clearer common actions.",
+          "Added always-on-top support for faster cross-app copy/paste workflows.",
+          "Improved quick preview and panel interactions for better usability."
+        ]
+      }
+    }
+  ]
+}

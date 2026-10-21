@@ -2,6 +2,7 @@ export const zhCN = {
   nav: {
     features: '价值',
     download: '下载',
+    changelog: '更新日志',
     help: '帮助',
     github: 'GitHub',
   },
@@ -67,7 +68,7 @@ export const zhCN = {
     subtitle: '轻量高效，专注体验',
     version: '当前版本',
     windows: 'Windows 下载',
-    macos: 'macOS 下载',
+    macos: 'macOS (敬请期待)',
     linux: 'Linux (敬请期待)',
   },
   footer: {

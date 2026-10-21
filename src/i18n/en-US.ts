@@ -2,6 +2,7 @@ export const enUS = {
   nav: {
     features: 'Why Qollect',
     download: 'Download',
+    changelog: 'Changelog',
     help: 'Help',
     github: 'GitHub',
   },
@@ -67,7 +68,7 @@ export const enUS = {
     subtitle: 'Lightweight and efficient.',
     version: 'Current version',
     windows: 'Windows Download',
-    macos: 'macOS Download',
+    macos: 'macOS (Coming Soon)',
     linux: 'Linux (Coming Soon)',
   },
   footer: {

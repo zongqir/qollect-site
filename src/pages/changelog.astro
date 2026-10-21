@@ -1,0 +1,83 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import fallbackNotes from '../data/release-notes.json';
+import '../styles/global.css';
+
+const base = import.meta.env.BASE_URL;
+
+let releases = fallbackNotes.releases || [];
+
+try {
+  const res = await fetch('https://dl.zongqir.com/release-notes.json', { signal: AbortSignal.timeout(3000) });
+  if (res.ok) {
+    const data = await res.json();
+    if (Array.isArray(data.releases) && data.releases.length > 0) {
+      releases = data.releases;
+    }
+  }
+} catch {
+  // Use fallbackNotes
+}
+---
+
+<Layout
+  title="Qollect 更新日志 - Changelog"
+  description="Qollect 版本演进记录与完整历史更新日志。"
+  lang="zh-CN"
+>
+  <Navbar />
+  <main class="pt-24 pb-16 px-6 max-w-4xl mx-auto">
+    <div class="glass-card p-8 md:p-10 mb-8">
+      <p class="text-xs uppercase tracking-[0.2em] text-text-muted">Qollect Releases</p>
+      <h1 class="mt-3 text-3xl md:text-4xl font-extrabold text-text-primary">版本更新日志</h1>
+      <p class="mt-4 text-text-secondary leading-7">
+        记录 Qollect 每一个版本的核心演进、功能增强与缺陷修复。
+      </p>
+    </div>
+
+    <div class="space-y-6">
+      {releases.map((release) => {
+        const anchorId = `v${String(release.version || '').replace(/\./g, '-')}`;
+        const summary = release.summary?.['zh-CN'] || release.summary?.['en-US'] || '';
+        const highlights = release.highlights?.['zh-CN'] || release.highlights?.['en-US'] || [];
+
+        return (
+          <section id={anchorId} class="glass-card p-6 md:p-8 scroll-mt-24 transition-all">
+            <div class="flex flex-wrap items-baseline justify-between gap-3 border-b border-white/10 pb-4 mb-4">
+              <div class="flex items-center gap-3">
+                <h2 class="text-2xl font-bold text-text-primary">v{release.version}</h2>
+                <a href={`#${anchorId}`} class="text-text-muted hover:text-accent-blue text-sm font-mono transition-colors">#{anchorId}</a>
+              </div>
+              {release.publishedAt && (
+                <span class="text-sm text-text-muted font-mono">{release.publishedAt}</span>
+              )}
+            </div>
+
+            {summary && (
+              <p class="text-text-primary font-medium mb-4 leading-relaxed">
+                {summary}
+              </p>
+            )}
+
+            {highlights.length > 0 && (
+              <ul class="list-disc list-inside space-y-2 text-sm text-text-secondary leading-relaxed">
+                {highlights.map((item) => (
+                  <li class="marker:text-accent-blue">{item}</li>
+                ))}
+              </ul>
+            )}
+          </section>
+        );
+      })}
+    </div>
+
+    <div class="mt-8 text-center">
+      <a class="btn-glow inline-flex items-center gap-2" href={`${base}#download`}>
+        返回下载页面
+      </a>
+    </div>
+  </main>
+  <Footer />
+</Layout>
