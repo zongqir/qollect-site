@@ -2,6 +2,115 @@
   "changelogUrl": "https://qollect.zongqir.com/changelog",
   "releases": [
     {
+      "version": "0.6.5",
+      "publishedAt": "2026-10-24",
+      "changelogUrl": "https://qollect.zongqir.com/changelog#v0-6-5",
+      "summary": {
+        "zh-CN": "修复集成设置保存及邮件中继切换时 useAppStore 未导入导致的运行时 ReferenceError 崩溃，确保邮件功能完整可达。",
+        "en-US": "Fixed runtime ReferenceError crash caused by unimported useAppStore when saving integration settings or toggling email relay, ensuring email dispatch availability."
+      },
+      "highlights": {
+        "zh-CN": [
+          "解决集成设置保存运行时崩溃：补齐 `useIntegrationsSettings` 中漏掉导入的 `useAppStore`，彻底消除点击「保存」或切换邮件中继开关时的 `ReferenceError: useAppStore is not defined` 阻断异常。",
+          "状态同步与邮件入口恢复：修复因保存抛错导致全局状态未更新的连锁反应，使邮件中继开启后能正确在卡片右键、预览抽屉及分享弹层中实时显现邮件发送入口。"
+        ],
+        "en-US": [
+          "Integration Settings Save Crash Fix: Added the missing `useAppStore` import in `useIntegrationsSettings`, eliminating the blocking `ReferenceError: useAppStore is not defined` when saving settings or toggling email relay.",
+          "State Synchronization & UI Availability: Restored proper state synchronization to prevent failed saves from hiding email dispatch triggers in card context menus, preview drawer, and share modal."
+        ]
+      }
+    },
+    {
+      "version": "0.6.4",
+      "publishedAt": "2026-10-24",
+      "changelogUrl": "https://qollect.zongqir.com/changelog#v0-6-4",
+      "summary": {
+        "zh-CN": "修复邮件中继配置持久化与保存门禁缺陷，上线全资产（文本/图片/文件）收集箱邮件分享与卡片右键分享联动。",
+        "en-US": "Fixed email relay persistence and validation gates, introducing universal collection asset sharing (text/image/file) via email and card context menu share actions."
+      },
+      "highlights": {
+        "zh-CN": [
+          "邮件中继配置持久化修复：彻底解决集成设置中邮件中继漏掉保存的严重缺陷，并放宽后端保存门禁，杜绝开关打开时因字段未填满被拒收而导致入口完全隐匿的现象。",
+          "全资产（文字/图片/文件）邮件分发：打通纯文本（正文/长文txt附件）、图片（原图附件+OCR正文）及本地文件（小文件自动打包附件）全类型邮件派发链路，不再局限于单一资产类型。",
+          "收集箱标准化邮件模版：规范化统一默认邮件主题（`[Qollect] 收集箱文字分享 | 文本摘要`、`[Qollect] 收集箱分享 | 图片资产_时间戳`）与结构化正文模版，自动呈现资产类型、条目备注与标签。",
+          "卡片右键快捷分享对齐：在历史流与收藏区卡片自定义右键菜单中正式新增「分享」入口，与「发到邮箱」对齐，提升多端分享触达效率。"
+        ],
+        "en-US": [
+          "Email Relay Persistence Fix: Resolved the critical bug where email relay settings were omitted during integration save, and eliminated restrictive backend validation gates on draft save to prevent UI menu disappearance.",
+          "Universal Multi-Asset Email Dispatch: Enabled seamless email sharing for plain text (in-body / .txt attachment for >1000 chars), images (lossless attachments + OCR text), and local files (automatic <=20MB attachment packaging).",
+          "Standardized Collection Email Template: Established clear default subject lines (`[Qollect] Collection Text Share | Snippet`, `[Qollect] Collection Share | Image Asset_Timestamp`) and structured body formats containing asset metadata, tags, and user notes.",
+          "Card Context Menu Share Alignment: Added direct \"Share\" action to the card context menu across history stream and collections, aligning with \"Send to Email\" for frictionless multi-channel sharing."
+        ]
+      }
+    },
+    {
+      "version": "0.6.3",
+      "publishedAt": "2026-10-24",
+      "changelogUrl": "https://qollect.zongqir.com/changelog#v0-6-3",
+      "summary": {
+        "zh-CN": "重构 GitHub Actions 发布构建管线，建立基准依赖热缓存与优化链接性能，并包含大文本预览注水优先级修复。",
+        "en-US": "Refactored GitHub Actions release pipeline with warm base dependency caching and optimized linking, including full-text preview hydration priority fix."
+      },
+      "highlights": {
+        "zh-CN": [
+          "CI 构建管线深度提速：建立 dev-fav 默认分支专属的 Rust 依赖热缓存预热机制，解除 Tag 跨分支隔离障碍，关闭全模块 ThinLTO 链接重负，大幅压缩发版等待时间。",
+          "发布权限与孤儿缓存治理：修复 GitHub Actions 仓库级工作流写权限配置，全面清理历史无用 Tag 缓存，杜绝发版临界报错与存储配额挤压。",
+          "预览抽屉全量注水优先级保障：保证异步全量注水（Hydration）拉取到的 100% 完整原文优先于历史流 4000 字符轻量缓存，消除长文本截断隐患与分卷派发异常。"
+        ],
+        "en-US": [
+          "CI Build Pipeline Acceleration: Implemented a dedicated Rust dependency warm-cache workflow on the dev-fav branch, eliminating Tag cross-ref isolation bottlenecks and turning off ThinLTO link overhead to drastically reduce release time.",
+          "Release Permission and Orphan Cache Cleanup: Fixed repository-level GitHub Actions workflow write permissions and purged legacy orphan Tag caches to prevent release-stage 403 errors and cache quota exhaustion.",
+          "Preview Drawer Full-Text Hydration Assurance: Guaranteed that 100% full content retrieved via asynchronous hydration takes strict precedence over the 4000-character light cache, eliminating text truncation and chunk dispatch anomalies."
+        ]
+      }
+    },
+    {
+      "version": "0.6.2",
+      "publishedAt": "2026-10-24",
+      "changelogUrl": "https://qollect.zongqir.com/changelog#v0-6-2",
+      "summary": {
+        "zh-CN": "修复预览抽屉中大文本被列表 4000 字符轻量缓存覆盖截断的关键缺陷，彻底保障长脚本与大文档全量预览、分卷派发及无损复制。",
+        "en-US": "Fixed a critical issue where preview drawer full-text was overridden by the 4000-character list query cache, ensuring lossless preview, chunk dispatch, and full copy for large scripts and documents."
+      },
+      "highlights": {
+        "zh-CN": [
+          "预览抽屉全量注水优先级修复：彻底修复 PreviewPanel 中预览项缓存覆盖逆序的缺陷，确保异步全量注水（Hydration）拉取到的 100% 完整原文优先于历史流 4000 字符轻量缓存。",
+          "大文本分卷派发不再提前截断：解决超长文本（如万字代码、排障文档）在分卷派发时因轻量缓存被提前截断至 4000 字符以内的缺陷，保证所有分卷覆盖全量文档。",
+          "消除分卷临界异常导致的双卡片假象：修复由于原内容被截断至 4000 字符而导致刚好产生 2 卷且内容不全的体验盲区，全量复制与跨端重组链路完全闭环。"
+        ],
+        "en-US": [
+          "Preview Drawer Full-Text Hydration Priority: Fixed an inverted cache-merging bug in PreviewPanel, guaranteeing that fully-hydrated content retrieved from database takes strict precedence over the 4000-character light list cache.",
+          "Prevent Premature Truncation in Chunk Dispatch: Ensured large scripts and documents (tens of thousands of characters) are split across the entire content rather than being clipped at 4000 characters.",
+          "Eliminate Truncation-Induced Dual-Chunk Confusion: Resolved the edge-case where truncated 4000-character payloads produced incomplete 2-chunk sequences, restoring robust full-text streaming and reassembly."
+        ]
+      }
+    },
+    {
+      "version": "0.6.1",
+      "publishedAt": "2026-10-24",
+      "changelogUrl": "https://qollect.zongqir.com/changelog#v0-6-1",
+      "summary": {
+        "zh-CN": "新增跨端分卷一键流式派发与自动凑整重组协议，消除远程桌面反弹回声与丢包盲区，并将分卷器纳管为可选功能模块。",
+        "en-US": "Added sequential chunk streaming and auto-reassembly protocol across remote desktops, eliminated clipboard echo reflection loops and drop timeouts, and integrated feature module toggle."
+      },
+      "highlights": {
+        "zh-CN": [
+          "跨端分卷流式派发（Sequential Chunk Dispatch）：支持外网/宿主机一键以 800ms 安全节流节奏将大文本各分卷顺序推入剪贴板，内网/对端 Qollector 自动监听并根据 QC1 协议在内存完成无损拼装入库。",
+          "阻断 RDP 双向剪贴板回声风暴：对端拼装完成后直接落库 SQLite 与历史流顶部，不再反向覆写操作系统剪贴板，彻底消除远程桌面（RDP/VDI）双向同步导致的万字大文本镜像反弹与重复记录。",
+          "12 秒看门狗丢包超时告警：接收端引入异步会话看门狗，若网络抖动或丢包导致 12 秒内未集齐全部卷片，自动清理残卷并弹出错误 Toast 告知缺失情况，杜绝静默挂起与数据蒸发。",
+          "功能模块灵活启闭：在【设置 > 功能模块】中正式将【长文本安全分卷器】纳管为独立可选开关，默认关闭，满足极简轻量与复杂跳板机场景的双向需求。",
+          "右键菜单邮件中继直达：在历史流卡片右键菜单直接接入【发送到邮箱】通道，优化图片资产与文本跨网投递路径。"
+        ],
+        "en-US": [
+          "Sequential Chunk Dispatch Protocol: Enables one-click throttled (800ms) streaming of multi-part chunks via clipboard; remote Qollector automatically detects and reassembles chunks seamlessly via QC1 header protocol.",
+          "Anti-Echo Reflection Protection: Reassembled full text is committed directly to SQLite and history stream without writing back to the OS clipboard, completely eliminating RDP/VDI bidirectional reflection loops.",
+          "12-Second Chunk Timeout Watchdog: Asynchronous watchdog alerts user via error Toast if parts are dropped or network stalls, preventing silent memory hangs and packet loss blackholes.",
+          "Feature Module Modular Toggle: Text Chunk Splitter is now a dedicated toggle in Settings > Feature Modules (disabled by default), tailoring to both minimalist and complex bastion scenarios.",
+          "Context Menu Email Relay: Integrated 'Send to Email' directly into the card context menu, streamlining picture and text asset delivery across network boundaries."
+        ]
+      }
+    },
+    {
       "version": "0.6.0",
       "publishedAt": "2026-10-24",
       "changelogUrl": "https://qollect.zongqir.com/changelog#v0-6-0",
