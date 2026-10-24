@@ -6,7 +6,7 @@ const t = useTranslations(Astro.url);
 
 const R2_BASE = 'https://dl.zongqir.com';
 let initialVersion = packageJson.version;
-let initialWindowsUrl = `${R2_BASE}/releases/v${initialVersion}/Qollect_${initialVersion}_x64-setup.exe`;
+let initialWindowsUrl = `${R2_BASE}/releases/latest/Qollect_x64-setup.exe`;
 
 try {
   const res = await fetch(`${R2_BASE}/latest.json`, { signal: AbortSignal.timeout(3000) });
@@ -15,8 +15,6 @@ try {
     const v = String(data.version || '').replace(/^v/, '');
     if (v) {
       initialVersion = v;
-      const platforms = data.platforms || {};
-      initialWindowsUrl = platforms['windows-x86_64-nsis']?.url || platforms['windows-x86_64']?.url || `${R2_BASE}/releases/v${v}/Qollect_${v}_x64-setup.exe`;
     }
   }
 } catch {
@@ -72,11 +70,8 @@ const icons = {
       const versionEl = document.getElementById('dl-version');
       if (versionEl) versionEl.textContent = `v${version}`;
 
-      const base = `${R2_BASE}/releases/v${version}`;
-      const platforms = data.platforms || {};
-      const winUrl = platforms['windows-x86_64-nsis']?.url || platforms['windows-x86_64']?.url || `${base}/Qollect_${version}_x64-setup.exe`;
       const el = document.getElementById('dl-windows');
-      if (el && winUrl) el.href = winUrl;
+      if (el) el.href = `${R2_BASE}/releases/latest/Qollect_x64-setup.exe`;
     })
     .catch((error) => {
       console.warn('[download] failed to load latest.json, using fallback version', error);
