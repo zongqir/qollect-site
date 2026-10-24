@@ -2,6 +2,98 @@
   "changelogUrl": "https://qollect.zongqir.com/changelog",
   "releases": [
     {
+      "version": "0.6.0",
+      "publishedAt": "2026-10-24",
+      "changelogUrl": "https://qollect.zongqir.com/changelog#v0-6-0",
+      "summary": {
+        "zh-CN": "全新发布企业受限网络协作生产力套装：支持长文本智能语义分卷突破跳板机 4096 字符限制，新增企业内部邮件中继一键发给自己，通过 Webmail 轻松跨越网闸提取图片资产。",
+        "en-US": "Major release introducing enterprise restricted-network productivity suite: smart text chunk splitting to conquer 4096-char bastion limits, and internal email relay for effortless self-delivery and Webmail asset retrieval."
+      },
+      "highlights": {
+        "zh-CN": [
+          "长文本智能语义安全分卷器：针对跳板机、深信服 aDesk VDI、堡垒机单次 4096 字符截断痛点，基于代码结构与自然断行算法以 3500 字符安全阈值智能分卷，100% 保证无损可逆重组。",
+          "就绪顺延连续复制交互（Ready Next Flow）：复制前一分卷后自动激活并推荐下一卷，带行号范围与字符统计，支持盲操连续过关，小窗与 Mini 模式排版自适应。",
+          "企业内部邮件中继（Internal Email Relay）：在【设置 > 功能模块】中提供独立可选的邮件中继通道，支持内网端口 25 明文、内网 IP 免密白名单、自签证书 TLS 与工号认证，密码强制采用 AES-GCM 密文存储。",
+          "一键发给我自己（Send to Self 闭环）：收发件人均锚定为自身企业邮箱，本域路由零外发阻断与 DLP 违规风险；在图片预览面板与操作栏提供一键发送入口，外网电脑登录企业 Webmail 即可秒级提取原图附件。",
+          "零违规样式门禁防护：全局强化 CSS 令牌治理，通过自动化 strict style guard 门禁断言，确保全平台视觉一致性与毛玻璃层级稳定性。"
+        ],
+        "en-US": [
+          "Smart Text Chunk Splitter: Overcomes the strict 4096-character clipboard limit of bastion hosts and VDI environments with a 3500-char safe threshold, natural line-break heuristics, and 100% deterministic reassembly.",
+          "Ready Next Continuous Copy Flow: Automatically activates and highlights the subsequent chunk upon copying, complete with line ranges and character metrics, fully responsive in standard and Mini modes.",
+          "Internal Enterprise Email Relay: Placed under Settings > Feature Modules as an optional toggle; supports internal port 25, IP whitelist relay, self-signed TLS, and credential authentication with AES-GCM encrypted persistence.",
+          "One-Click Send-to-Self Workflow: Routes exclusively within corporate domain to eliminate DLP security triggers; provides one-click picture delivery from preview drawer for effortless retrieval via external Webmail.",
+          "Strict Style Guard Enforcement: Standardized design token compliance across all components with zero style guard violations, maintaining visual fidelity and responsive robustness."
+        ]
+      }
+    },
+    {
+      "version": "0.5.17",
+      "publishedAt": "2026-10-24",
+      "changelogUrl": "https://qollect.zongqir.com/changelog#v0-5-17",
+      "summary": {
+        "zh-CN": "新增选中即复制原地粘贴智能替换保护，解决高亮覆盖时冲刷原剪贴板的根本痛点，并修复抽屉组件状态残留异常。",
+        "en-US": "Introduced smart in-place replace protection for copy-on-select to prevent clipboard overwrite loss, and fixed residual state error in preview drawer."
+      },
+      "highlights": {
+        "zh-CN": [
+          "原地粘贴智能替换保护：利用底层键盘与鼠标双低级钩子（WH_KEYBOARD_LL / WH_MOUSE_LL）协同，在划选文字后若直接按 Ctrl+V 覆盖粘贴，毫秒级还原此前剪贴板资产并完成无缝替换，彻底告别原剪贴板被冲刷的焦虑。",
+          "意图场景自适应识别：单次点击移动光标、按键打字或切换应用窗口时，系统自动安全解除武装，确保正常信息摘抄与跨应用搬运 100% 顺畅生效。",
+          "通用设置与快捷开关：在设置 > 通用中新增【原地粘贴智能替换保护】开关，支持用户按需自定义启用状态并全局持久化。",
+          "抽屉组件稳定性修复：彻底移除 PreviewPanel 中历史重构遗留的未定义状态重置副作用，消除卡片切换时的运行时 ReferenceError 崩溃。"
+        ],
+        "en-US": [
+          "Smart In-Place Replace Protection: Employs synchronized low-level hooks (WH_KEYBOARD_LL / WH_MOUSE_LL) to preserve previous clipboard content; pressing Ctrl+V immediately after selection automatically restores original assets for seamless overwrite, eliminating unexpected clipboard loss.",
+          "Context-Aware Intent Detection: Automatically disarms replace mode upon cursor deselection click, keyboard typing, or window switching to guarantee frictionless cross-app copying.",
+          "General Settings Integration: Added a dedicated toggle for 'Smart in-place replace protection' under Settings > General with instant persistence.",
+          "Preview Drawer Stability Fix: Removed obsolete state reset effect in PreviewPanel, resolving runtime ReferenceError on item selection."
+        ]
+      }
+    },
+    {
+      "version": "0.5.16",
+      "publishedAt": "2026-10-23",
+      "changelogUrl": "https://qollect.zongqir.com/changelog#v0-5-16",
+      "summary": {
+        "zh-CN": "重构抽屉为高拓展性文本转换注册表架构，新增 Unicode 还原、终端清洗、路径转义等 8 大高频防报错动作与双模态明文预览。",
+        "en-US": "Refactored preview drawer into an extensible transform registry architecture, introducing 8 deterministic sanitization actions including Unicode decode, terminal prompt cleanup, path conversion, and inline decoded preview."
+      },
+      "highlights": {
+        "zh-CN": [
+          "插件化转换注册表架构：解耦 UI 渲染与转换规则，所有特征识别与文本清洗均以确定性纯函数规则声明，后续可零侵入无限拓展新模式。",
+          "高频防报错清洗规则：新增终端提示符（$、#、>）剥离、Windows 路径反斜杠转 POSIX 正斜杠、Token/密文隐形断行脱水、URL 百分号解码、Git 40位短 Hash 提取与环境变量 export 剥离。",
+          "JSON 压缩与时间戳整合：补齐多行 JSON 压缩为单行（专供 CLI 与环境变量），时间戳在抽屉底部常态清晰可见，一键复制格式化日期。",
+          "所见即所得双模态内联预览：针对 Unicode 转义（\\uXXXX）和 URL 乱码，支持在抽屉内一键切换【原始文本】与【解码明文】，双击直出明文。"
+        ],
+        "en-US": [
+          "Extensible Transform Registry: Decoupled UI components from text transformation rules, enabling declarative pure-function rule matching and zero-touch extensibility for future formats.",
+          "Deterministic Error-Prevention Actions: Introduced terminal prompt stripping ($, #, >), Windows backslash to POSIX slash conversion, token whitespace/break sanitization, URL percent-decode, 7-char Git short SHA extraction, and export prefix stripping.",
+          "JSON Compact & Timestamp Integration: Added multi-line JSON compaction to single-line for CLI/env usage, and embedded permanent formatted timestamp display in the preview metadata bar.",
+          "WYSIWYG Dual-Mode Inline Preview: Support instant toggling between [Raw] and [Decoded] views for Unicode escape sequences (\\uXXXX) and URL percent-encoding, with double-click copying the decoded text directly."
+        ]
+      }
+    },
+    {
+      "version": "0.5.15",
+      "publishedAt": "2026-10-23",
+      "changelogUrl": "https://qollect.zongqir.com/changelog#v0-5-15",
+      "summary": {
+        "zh-CN": "优化去重与缩进保护，下线自然语言 AI 搜索回归极速本地检索，并收敛 AI 标题信息密度准入门槛。",
+        "en-US": "Refined hash deduplication with indentation preservation, retired natural language AI search in favor of instant local FTS, and established an information-density threshold for AI titles."
+      },
+      "highlights": {
+        "zh-CN": [
+          "代码缩进保护与去重净化：哈希去重时保留代码和制表符缩进，避免代码格式被破坏；当重复命中更纯净的文本时，自动原地清洗数据库脏空格并刷新全文索引。",
+          "下线自然语言 AI 搜索：移除高延迟且繁琐的自然语言搜索面板与重排分支，检索体验全面回归毫秒级纯本地 SQLite FTS5 引擎，减少冗余开销。",
+          "AI 标题信息密度准入门槛：短文本（中文少于10字、英文少于25字符）及单行琐碎代码坚决不打标题，杜绝空洞标题噪音；多行复杂代码、结构化定义与完整备忘保持清晰提炼。"
+        ],
+        "en-US": [
+          "Code Indentation & Cleaner Deduplication: Code and tab indentation are preserved during hash normalization to avoid format loss, and cleaner text automatically replaces dirty whitespace upon duplicate detection.",
+          "Retired Natural Language AI Search: Removed the slow planning/reranking natural language search panel, restoring full focus on instant local SQLite FTS5 querying.",
+          "Information Density Gate for AI Titles: Trivial single-line code and short snippets (<10 CJK chars, <25 Western chars) no longer generate noisy placeholder titles, while structural code and memos retain high-value summaries."
+        ]
+      }
+    },
+    {
       "version": "0.5.14",
       "publishedAt": "2026-10-21",
       "changelogUrl": "https://qollect.zongqir.com/changelog#v0-5-14",
